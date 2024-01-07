@@ -1,0 +1,514 @@
+{\rtf1\ansi\ansicpg1252\deff0\nouicompat\deflang1033{\fonttbl{\f0\fnil\fcharset0 Calibri;}}
+{\*\generator Riched20 10.0.22621}\viewkind4\uc1 
+\pard\sl276\slmult1\f0\fs22\lang9 <?php \par
+include('../../config.php');\par
+session_start();\par
+?>\par
+<!DOCTYPE html> \par
+<html lang="en">\par
+<head>\par
+    <meta charset="UTF-8">\par
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">\par
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">\par
+    <title> Certificate Programs</title>\par
+    <link rel="stylesheet" href="styles.css">\par
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">\par
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.18/css/dataTables.bootstrap4.min.css">\par
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">\par
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">\par
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">\par
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">\par
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">\par
+</head>\par
+<body>\par
+    <?php include('../../header.php'); ?>\par
+    <!-- Modal -->\par
+    <!-- this is add data form Make changes to variables, keep same variables -->\par
+    <div class="modal fade mt-2" id="studentaddmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"\par
+        aria-hidden="true">\par
+        <div class="modal-dialog" role="document">\par
+            <div class="modal-content">\par
+                <div class="modal-header">\par
+                    <h5 class="modal-title" id="exampleModalLabel">Add Data </h5>\par
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">\par
+                        <span aria-hidden="true">&times;</span>\par
+                    </button>\par
+                </div>\par
+                <form action="insertcode.php" method="POST" enctype="multipart/form-data" >\par
+                    <div class="modal-body">\par
+                        <div class="form-group">\par
+                            <label>Year of offering</label>\par
+                            <select name="Year_of_offering" class="form-control" required>\par
+                                <option value="">--Select Year--</option>\par
+                                <option name="Year_of_offering" value="2017-18">2017-18</option>\par
+                                <option name="Year_of_offering" value="2018-19">2018-19</option>\par
+                                <option name="Year_of_offering" value="2019-20">2019-20</option>\par
+                                <option name="Year_of_offering" value="2020-21">2020-21</option>\par
+                                <option name="Year_of_offering" value="2021-22">2021-22</option>\par
+                                <option name="Year_of_offering" value="2021-22">2022-23</option>\par
+                            </select>\par
+</div>\par
+                        <div class="form-group">\par
+                            <label>Department</label>\par
+                            <select name="Branch" class="form-control" required>\par
+                                <option value="">--Select Department--</option>\par
+                                <option name="Department" value="IT">IT</option>\par
+                                <option name="Department" value="EXTC">EXTC</option>\par
+                                <option name="Department" value="Mechanical">Mechanical</option>\par
+                                <option name="Department" value="Computers">Computers</option>\par
+                                <option name="Department" value="Electrical">Electrical</option>\par
+                                <option name="Department" value="Humanities">Humanities</option>\par
+                            </select>\par
+                        </div>\par
+                        <div class="form-group">\par
+                            <label> Course_coordinator </label>\par
+                            <input type="text" name="Course_coordinator" class="form-control" placeholder="Enter Course_coordinator" required>\par
+                        </div>\par
+                        <div class="form-group">\par
+                            <label> Programs_offered </label>\par
+                            <input type="text" name="Programs_offered" class="form-control" placeholder="Programs_offered" required>\par
+                        </div>\par
+                        <div class="form-group">\par
+                            <label> Course_code </label>\par
+                            <input type="text" name="Course_code" class="form-control" placeholder="Enter course code">\par
+                        </div>\par
+                        <div class="form-group">\par
+                            <label> No_of_times_offered </label>\par
+                            <input type="number" name="No_of_times_offered" class="form-control" placeholder="Enter No_of_times_offered" required>\par
+                        </div>\par
+                                                <div class="form-group">\par
+                            <label> Start_date </label>\par
+                            <input type="date" name="Start_date" class="form-control" placeholder="Enter start date" required>\par
+                        </div>\par
+                        <div class="form-group">\par
+                            <label> End_date </label>\par
+                            <input type="date" name="End_date" class="form-control" placeholder="Enter end date" required>\par
+                        </div>\par
+                        <div class="form-group">\par
+                            <label> Duration </label>\par
+                            <input type="number" name="Duration" class="form-control" placeholder="Enter duration" required>\par
+                        </div>\par
+                        <div class="form-group">\par
+                            <label> No_of_students_enrolled </label>\par
+                            <input type="number" name="No_of_students_enrolled" class="form-control" placeholder="Enter No_of_students_enrolled" required>\par
+                        </div>\par
+                        <div class="form-group">\par
+                            <label> No_of_students_completing </label>\par
+                            <input type="number" name="No_of_students_completing" class="form-control" placeholder="Enter No_of_students_completing" required>\par
+                        </div>\par
+                        <div class="form-group">\par
+                            <label> Upload Report </label>\par
+                            <input type="file" name="pdffile1" id="pdffile1" required/><br>\par
+                                    <img src="" id="pdf-file1-tag" width="100px" />\par
+                                    <script type="text/javascript">\par
+                                        function readURL(input) \{\par
+                                            if (input.files && input.files[0]) \{\par
+                                                var reader = new FileReader();\par
+                                                \par
+                                                reader.onload = function (e) \{\par
+                                                    $('#pdf-file1-tag').attr('src', e.target.result);\par
+                                                \}\par
+                                                reader.readAsDataURL(input.files[0]);\par
+                                            \}\par
+                                        \}\par
+                                        $("#pdffile1").change(function()\{\par
+                                            readURL(this);\par
+                                        \});\par
+                                    </script><br>\par
+\tab\tab\tab\tab\tab\tab </div>\tab\par
+                    </div>\par
+                    <div class="modal-footer">\par
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>\par
+                        <button type="submit" id="insertbutton" name="insertdata" class="btn btn-primary" onClick="datechecker() ">Save Data</button>\par
+                    </div>\par
+                </form>\par
+            </div>\par
+        </div>\par
+    </div>\par
+    <!-- DELETE POP UP FORM  -->\par
+    <!-- dont make changes-->\par
+    <div class="modal fade" id="deletemodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"\par
+        aria-hidden="true">\par
+        <div class="modal-dialog" role="document">\par
+            <div class="modal-content">\par
+                <div class="modal-header">\par
+                    <h5 class="modal-title" id="exampleModalLabel"> Delete Student Data </h5>\par
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">\par
+                        <span aria-hidden="true">&times;</span>\par
+                    </button>\par
+                </div>\par
+                <form action="deletecode.php" method="POST">\par
+                    <div class="modal-body">\par
+                        <input type="hidden" name="delete_id" id="delete_id">\par
+                        <h4> Do you want to Delete this Data ??</h4>\par
+                    </div>\par
+                    <div class="modal-footer">\par
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal"> NO </button>\par
+                        <button type="submit" name="deletedata" class="btn btn-primary"> Yes, Delete it. </button>\par
+                    </div>\par
+                </form>\par
+            </div>\par
+        </div>\par
+    </div>\par
+ <!-- main card -->\par
+ <!-- buttons and search buttoncard -->\par
+            <div class="card">\par
+                <div class="card-body">\par
+                <?php \par
+                if($_SESSION["role"] == true) \{\par
+                    echo "Welcome". " ".$_SESSION["role"] ;\par
+                \} else \{\par
+                    header("Location:index.php"); \par
+                \}\par
+                ?>            <div class="card-body mt-5">\par
+                <h2> Certificate programs</h2>\par
+            </div>\par
+            <div class="card">\par
+                <div class="card-body btn-group">\par
+                <form action="<?php echo $_SERVER["PHP_SELF"]; ?>" method="post">\par
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#studentaddmodal"> \par
+                        ADD DATA\par
+                    </button>\par
+            </form> &nbsp;            <form action="<?php echo $_SERVER["PHP_SELF"]; ?>" method="post">\tab\tab\tab\par
+\tab\tab\tab\tab <button type="submit" onclick="exportTableToCSVuser('USerData_BookChapters.csv')" class="btn btn-success">Export to excel</button>\par
+\tab\tab\tab </form> &nbsp; &nbsp; \par
+                    <form method="post">\par
+                <label>Search</label>\par
+                <input type="text" name="search">\par
+                <input type="submit" name="submit">\par
+            </form>\par
+            </div>\par
+            </div>\par
+             <!-- table -->\par
+            <div id="tabledataid" class="card">\par
+                <div class="card-body">\par
+                      <!-- th change -->\par
+                    <table id="datatableid" class="table table-bordered table-dark mt-2">\par
+                        <thead>\par
+                            <tr>\par
+                                <th scope="col"> ID </th>\par
+                                <th scope="col"> Department </th>\par
+                                <th scope="col"> Course Coordinator </th>\par
+                                <th scope="col"> Programs Offered </th>\par
+                                <th scope="col"> Course Code </th>\par
+                                <th scope="col"> Year of offering </th>\par
+                                <th scope="col"> No of times offered </th>\par
+\tab\tab\tab\tab\tab\tab\tab\tab <th scope="col"> Start date </th>\par
+                                <th scope="col"> End date </th>\par
+                                <th scope="col"> Duration </th>\par
+                                <th scope="col"> No of students enrolled </th>\par
+                                <th scope="col"> No of students completing </th>\par
+                                <th scope="col"> Upload Report </th> <th scope="col"> Status </th>\par
+                                                       </tr>\par
+                        </thead>                        <?php\par
+                        $user = $_SESSION["role"];\par
+                        $result = "SELECT * FROM branchadmins WHERE username = '$user'";\par
+                        $query = mysqli_query($connection, $result);\par
+                        $queryresult = mysqli_num_rows($query); \par
+                            if($queryresult > 0)\{\par
+                                while($row = mysqli_fetch_assoc($query))\{ \par
+                                    $id = $row['id'];\par
+                                    $branch = $row['branch'];\par
+                                \}  \par
+                            \}\par
+                        $table_query = "SELECT * FROM certificates WHERE user_id=$id";                        $query_run = mysqli_query($connection, $table_query);\par
+                        $query_result = mysqli_num_rows($query_run); ?>\par
+                        <?php if($query_result > 0)\{\par
+                                        while($developer = mysqli_fetch_assoc($query_run))\{   \par
+                                            ?>\par
+                        <tbody> <!-- change -->\par
+                            <tr>\par
+                                <td> <?php echo $developer['id']; ?> </td>\par
+                                <td> <?php echo $developer['Department']; ?> </td> \par
+                                <td> <?php echo $developer['Course_coordinator']; ?> </td>\par
+                                <td> <?php echo $developer['Programs_offered']; ?> </td>\par
+                                <td> <?php echo $developer['Course_code']; ?> </td>\par
+                                <td> <?php echo $developer['Year_of_offering']; ?> </td>\par
+                                <td> <?php echo $developer['No_of_times_offered']; ?> </td>\par
+                                <td> <?php echo $developer['Start_date']; ?> </td>\par
+                                <td> <?php echo $developer['End_date']; ?> </td>\par
+                                <td> <?php echo $developer['Duration']; ?> </td>\par
+                                <td> <?php echo $developer['No_of_students_enrolled']; ?> </td>\par
+                                <td> <?php echo $developer['No_of_students_completing']; ?> </td>\par
+                                <td>\par
+                            <!--<a href="read.php?viewid=<?php echo htmlentities ($developer['id']);?>" class="view" title="View" data-toggle="tooltip"><i class="material-icons">&#xE417;</i></a>-->\par
+                            <a class="edit btn-success editbtn" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>\tab\tab\tab\tab\tab\tab\tab <!-- <a href="uploadsfrontit/<?php echo $developer['pdffile2']; ?>"  class="download" title="Download" data-toggle="tooltip"><i class="fa fa-download"></i></a> -->\par
+                            <a class="delete btn-danger deletebtn" class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>                            \par
+                            <!-- <button class="btn"><i class="fa fa-download"></i> Download</button> -->\par
+                        </td>\par
+                                <!-- <td>\par
+                                    <button type="button" class="btn btn-success editbtn"> EDIT </button>\par
+                                </td>\par
+                                <td>\par
+                                    <button type="button" class="btn btn-danger deletebtn"> DELETE </button>\par
+                                </td> -->\par
+                            </tr>\par
+                        </tbody>\par
+                        <?php           \par
+                    \}\par
+                \}\par
+                else \par
+                \{\par
+                    echo "No Record Found";\par
+                \}\par
+            ?>\par
+                    </table>\par
+        </div> \par
+    </div>\par
+    <!-- EDIT POP UP FORM  -->\par
+    <!-- this is edit data form Make changes to variables and placeholder, keep same variables -->\par
+    <div class="modal fade" id="editmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"\par
+        aria-hidden="true">\par
+        <div class="modal-dialog" role="document">\par
+            <div class="modal-content">\par
+                <div class="modal-header">\par
+                    <h5 class="modal-title" id="exampleModalLabel"> Edit Data </h5> &nbsp;\par
+                    <h5 class="modal-title" id="exampleModalLabel"> (Please enter the dates again)</h5>\par
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">\par
+                        <span aria-hidden="true">&times;</span>\par
+                    </button>\par
+                </div>\par
+                <form action="updatecode.php" method="POST">\par
+                    <div class="modal-body">\par
+                        <input type="hidden" name="update_id" id="update_id">\par
+                        <div class="form-group">\par
+                            <label> Year of offering </label>\par
+                            <input type="text"  id="Year_Of_offering" name="Year_of_offering" class="form-control" required>\par
+                        </div>\par
+                        <div class="form-group">\par
+                            <label> Department </label>\par
+                            <input type="text"  id="Department" name="Department"  class="form-control" required>\par
+                        </div>\par
+                        <div class="form-group">\par
+                            <label> Course_coordinator </label>\par
+                            <input type="text"  id="Course_coordinator" name="Course_coordinator" class="form-control" placeholder="Enter Course coordinator" required>\par
+                        </div>\par
+                        <div class="form-group">\par
+                            <label> Programs_offered </label>\par
+                            <input type="text" name="Programs_offered" id="Programs_offered" class="form-control" placeholder="Programs_offered" required>\par
+                        </div>\par
+                        <div class="form-group">\par
+                            <label> Course_code</label>\par
+                            <input type="text" name="Course_code"  id="Course_code" class="form-control" placeholder="Enter course code">\par
+                        </div>\par
+                        <div class="form-group">\par
+                            <label>  No_of_times_offered</label>\par
+                            <input type="number" name="No_of_times_offered" id="No_of_times_offered" class="form-control" placeholder="Enter No_of_times_offered " required>\par
+                        </div>\par
+                        <div class="form-group">\par
+                            <label>  Start_date</label>\par
+                            <input type="date" name="Start_date" id="Start_date" class="form-control" placeholder="Enter Start_date " required>\par
+                        </div>\par
+                        <div class="form-group">\par
+                            <label>  End_date</label>\par
+                            <input type="date" name="End_date" id="End_date" class="form-control" placeholder="Enter End_date " required>\par
+                        </div>\par
+                        <div class="form-group">\par
+                            <label>  Duration </label>\par
+                            <input type="number" name= "Duration" id= "Duration" class="form-control" placeholder="Enter Duration  " required>\par
+                        </div>\par
+                        <div class="form-group">\par
+                            <label>  No_of_students_enrolled</label>\par
+                            <input type="number" name="No_of_students_enrolled" id="No_of_students_enrolled" class="form-control" placeholder="Enter No_of_students_enrolled " required>\par
+                        </div>\par
+\par
+                        <div class="form-group">\par
+                            <label>  No_of_students_completing</label>\par
+                            <input type="number" name="No_of_students_completing" id="No_of_students_completing" class="form-control" placeholder="Enter No_of_students_completing " required>\par
+                        </div>\par
+                    </div>\par
+                    <div class="modal-footer">\par
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>\par
+                        <button type="submit" name="updatedata" class="btn btn-primary">Update Data</button>\par
+                    </div>\par
+                </form>\par
+            </div>\par
+        </div>\par
+    </div>\par
+\par
+<!--Search data -->\par
+<div id="srch" class="card-body">\par
+                <h4> Search Data </h4>\par
+                    <table class="table table-bordered ">\par
+                    <thead>\par
+                            <tr>\par
+                                <th> ID </th>\par
+                                <th> Department </th>\par
+                                <th> Course Coordinator </th>\par
+                                <th> Programs Offered </th>\par
+                                <th> Course Code </th>\par
+                                <th> Year of offering </th>\par
+                                <th> No of times offered </th>\par
+\tab\tab <th> Start date </th>\par
+                                <th> End date </th>\par
+                                <th> Duration </th>\par
+                                <th> No of students enrolled </th>\par
+                                <th> No of students completing </th>\par
+                                <th> Upload Report </th>\par
+                                <th> Status</th>\par
+                            </tr>\par
+                        </thead>       \par
+<?php \par
+    if (isset($_POST["submit"])) \{\par
+        $str = mysqli_real_escape_string($connection, $_POST["search"]);\par
+        $sth = "SELECT * FROM `certificates` WHERE user_id=$id AND (Department LIKE '%$str%' OR Course_coordinator LIKE '%$str%' OR Programs_offered LIKE '%$str%' OR Course_code LIKE '%$str%' OR Year_of_offering LIKE '%$str%' OR No_of_times_offered LIKE '$str' OR Start_date LIKE '%$str%' OR End_date LIKE '%$str%' OR Duration LIKE '%$str%' OR No_of_students_enrolled LIKE '%$str%' OR No_of_students_completing LIKE '%$str%') ";\par
+        $result = mysqli_query($connection, $sth);\par
+        $queryresult = mysqli_num_rows($result); ?>\par
+                    <div class="card">\par
+                        <div class="card-body btn-group">\par
+                        <div> Results- </div> &nbsp; &nbsp;\par
+                        <button class="btn btn-success" onclick="exportTableToCSV('Search_data.csv')"> Export Data </button>\par
+                        </div>\par
+                    </div>\par
+                    <?php if($queryresult > 0)\{\par
+                while($row = mysqli_fetch_assoc($result))\{   \par
+                    ?>\par
+                    <tbody id="srch"> \par
+                    <tr>                \par
+                        <td> <?php echo $row['id']; ?> </td>\par
+                                <td> <?php echo $row['Department']; ?> </td> \par
+                                <td> <?php echo $row['Course_coordinator']; ?> </td>\par
+                                <td> <?php echo $row['Programs_offered']; ?> </td>\par
+                                <td> <?php echo $row['Course_code']; ?> </td>\par
+                                <td> <?php echo $row['Year_of_offering']; ?> </td>\par
+                                <td> <?php echo $row['No_of_times_offered']; ?> </td>\par
+                                <td> <?php echo $row['Start_date']; ?> </td>\par
+                                <td> <?php echo $row['End_date']; ?> </td>\par
+                                <td> <?php echo $row['Duration']; ?> </td>\par
+                                <td> <?php echo $row['No_of_students_enrolled']; ?> </td>\par
+                                <td> <?php echo $row['No_of_students_completing']; ?> </td>\par
+                                <td>\par
+                            <!--<a href="read.php?viewid=<?php echo htmlentities ($row['id']);?>" class="view" title="View" data-toggle="tooltip"><i class="material-icons">&#xE417;</i></a>-->\par
+                            <a class="edit btn-success editbtn" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>\par
+                            <a href="uploadsindexit/<?php echo $row['pdffile1']; ?>"  class="download" title="Download" data-toggle="tooltip"><i class="fa fa-download"></i></a>\par
+\tab\tab\tab\tab\tab\tab\tab <!-- <a href="uploadsfrontit/<?php echo $row['pdffile2']; ?>"  class="download" title="Download" data-toggle="tooltip"><i class="fa fa-download"></i></a> -->\par
+                            <a class="delete btn-danger deletebtn" class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>\par
+                            <!-- <button class="btn"><i class="fa fa-download"></i> Download</button> -->\par
+                        </td>\par
+                    </tr> \par
+                    <tbody>\par
+                    <?php \par
+            \}\par
+\par
+        \} else \{\par
+            echo "No Results Found";\par
+        \}\par
+    \}\par
+    ?>\par
+    </table>\par
+    </div>\par
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>\par
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>\par
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>\par
+    <script src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script>\par
+    <script src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap4.min.js"></script>\par
+    <!--<script type="text/javascript">\par
+        function EnableDisableTextBox(Approving_Body) \{\par
+            var selectedValue = Approving_Body.options[Approving_Body.selectedIndex].value;\par
+            var txtOther = document.getElementById("txtOther");\par
+            txtOther.disabled = selectedValue == other ? false : true;\par
+            if (!txtOther.disabled) \{\par
+                txtOther.focus();\par
+            \}\par
+        \}\par
+    </script> -->\par
+    <script>\par
+        $(document).ready(function () \{\par
+            $('.deletebtn').on('click', function () \{\par
+                $('#deletemodal').modal('show');\par
+                $tr = $(this).closest('tr');\par
+                var data = $tr.children("td").map(function () \{\par
+                    return $(this).text();\par
+                \}).get();\par
+                console.log(data);\par
+                $('#delete_id').val(data[0]);\par
+            \});\par
+        \});\par
+    </script>\par
+    <script>\par
+        $(document).ready(function () \{\par
+            $('.editbtn').on('click', function () \{\par
+                $('#editmodal').modal('show');\par
+                $tr = $(this).closest('tr');\par
+                var data = $tr.children("td").map(function () \{\par
+                    return $(this).text();\par
+                \}).get();\par
+                console.log(data);\par
+                $('#update_id').val(data[0]);\par
+                $('#Department').val(data[1]);\par
+                $('#Course_coordinator').val(data[2]);\par
+                $('#Programs_offered').val(data[3]);\par
+                $('#Course_code').val(data[4]);\par
+                $('#Year_of_offering').val(data[5]);\par
+                $('#No_of_times_offered').val(data[6]);\par
+                $('#Start_date').val(data[7]);\par
+                $('#End_date').val(data[8]);\par
+                $('#Duration').val(data[9]);\par
+                $('#No_of_students_enrolled').val(data[10]);\par
+                $('#No_of_students_completing').val(data[11]);\par
+                $('#pdffile1').val(data[12]);\par
+                // $('#pdffile2').val(data[13]);\par
+            \});\par
+        \});\par
+    </script>\par
+<!--<script>\par
+        function datechecker() \{\par
+            if(document.getElementById('insertbutton').clicked == true) \{\par
+                alert("Dhjkd");\par
+            \}\par
+        \}\par
+</script>-->\par
+<script>  \par
+    function downloadCSVuser(csv, filename) \{  \par
+        var csvFile;  \par
+        var downloadLink;  \par
+        csvFile = new Blob([csv], \{type: 'text/csv'\});  \par
+        downloadLink = document.createElement("a");  \par
+        downloadLink.download = filename;  \par
+        downloadLink.href = window.URL.createObjectURL(csvFile);  \par
+        downloadLink.style.display = "none";  \par
+        document.body.appendChild(downloadLink);  \par
+        downloadLink.click();  \par
+    \}      function exportTableToCSVuser(filename) \{  \par
+     var csv = [];  \par
+    var x=document.getElementById("tabledataid");\par
+    var rows = x.querySelectorAll("table tr");  \par
+    for(var i=0; i<rows.length; i++) \{  \par
+        var row = [], cols = rows[i].querySelectorAll("td, th");  \par
+        for( var j=1; j<cols.length-1; j++)  \par
+        row.push(cols[j].innerText);  \par
+        csv.push(row.join(","));  \par
+    \}   \par
+    downloadCSVuser(csv.join("\\n"), filename);  \par
+    \}  \par
+</script> \par
+<script>  \par
+    function downloadCSV(csv, filename) \{  \par
+        var csvFile;  \par
+        var downloadLink;  \par
+        csvFile = new Blob([csv], \{type: 'text/csv'\});  \par
+        downloadLink = document.createElement("a");  \par
+        downloadLink.download = filename;  \par
+        downloadLink.href = window.URL.createObjectURL(csvFile);  \par
+        downloadLink.style.display = "none";  \par
+        document.body.appendChild(downloadLink);  \par
+        downloadLink.click();  \par
+    \}  \par
+    function exportTableToCSV(filename) \{  \par
+        var csv = [];  \par
+    var x=document.getElementById("srch");\par
+    var rows = x.querySelectorAll("table tr");  \par
+    for(var i=0; i<rows.length; i++) \{  \par
+        var row = [], cols = rows[i].querySelectorAll("td, th");  \par
+        for( var j=1; j<cols.length-1; j++)  \par
+        row.push(cols[j].innerText);  \par
+        csv.push(row.join(","));  \par
+    \}   \par
+    //call the function to download the CSV file  \par
+    downloadCSV(csv.join("\\n"), filename);  \par
+    \}  \par
+</script> \par
+</body>\par
+</html>\par
+}
+ 

@@ -1,0 +1,30 @@
+#include<iostream.h>
+#include<conio.h>
+class A{
+public:
+void final_print()
+{
+display();
+}
+virtual void display()
+{
+clrscr();
+cout<<"Printing from base class"<<endl;
+}
+};
+class B:public A
+{
+public:
+virtual void display()
+{
+cout<<"Printing from derived class"<<endl;
+}
+};
+void main()
+{
+A obj1;
+obj1.final_print();
+B obj2;
+obj2.final_print();
+getch();
+}
