@@ -31,27 +31,26 @@ session_start();
 
 <?php include('../../header.php'); ?>
 
- <!-- main carad -->
+ <!-- main card -->
  <!-- buttons and search buttoncard -->
             <div class="card">
                 <div class="card-body">
-              
+                <?php 
+                if($_SESSION["role"] == true) {
+                    echo "Welcome". " ".$_SESSION["role"] ;
+                } else {
+                    header("Location:index.php"); 
+                }
+                ?>
+
             <div class="card-body mt-5">
                 <h2> FDP / STTP Organised </h2>
             </div>
-
-            <?php 
-if ($_SESSION["role"] == true) {
-    echo '<div style="position: absolute; top: 100px; right: 70px; font-weight: bold; color: #007bff;">Welcome ' . $_SESSION["role"] . '<br><span style="color: #008000;">You logged in as Branchadmin</span></div>';
-} else {
-    header("Location: index.php"); 
-}
-?>
             <div class="card">
                 <div class="card-body btn-group">
                 
             <form action="<?php echo $_SERVER["PHP_SELF"]; ?>" method="post">					
-				<button type="submit" onclick="exportTableToCSVuser('USerData_FDPSTTPorganized.csv')" class="btn btn-success">Export to excel</button>
+				<button type="submit" onclick="exportTableToCSVuser('USerData_BookChapters.csv')" class="btn btn-success">Export to excel</button>
 			</form> &nbsp; &nbsp; 
         
             <form method="post">
@@ -81,7 +80,6 @@ if ($_SESSION["role"] == true) {
                                 <th scope="col"> NO OF DAYS </th>
                                 <th scope="col"> PARTICIPANTS</th>
                                 <th scope="col"> ACTION </th>
-                                <th scope="col"> STATUS </th>
                                
                             </tr>
                         </thead>
@@ -100,212 +98,42 @@ if ($_SESSION["role"] == true) {
                                 }  
                             }
 
-                        $table_query = "SELECT * FROM fdpsttporganised WHERE branch = '$branch' ORDER BY id ASC";  
+                        $table_query = "SELECT * FROM fdpsttporganised WHERE branch LIKE '%$branch%' ORDER BY id ASC";  
                         $query_run = mysqli_query($connection, $table_query);
                         $query_result = mysqli_num_rows($query_run); ?>
 
                         <?php if($query_result > 0){
                                         while($developer = mysqli_fetch_assoc($query_run)){   
                                             ?>
-                        <tbody>
-                <tr>
-                    <td><?php echo $developer['id']; ?></td>
-                    <td><?php echo $developer['Academic_year']; ?></td> 
-                    <td><?php echo $developer['Branch']; ?></td>
-                    <td><?php echo $developer['Title_Of_Program']; ?></td>
-                    <td><?php echo $developer['Approving_Body']; ?></td>
-                    <td><?php echo $developer['Grant_Amount']; ?></td>
-                    <td><?php echo $developer['Convener_Of_FDP_STTP']; ?></td>
-                    <td><?php echo $developer['Dates_From']; ?></td>
-                    <td><?php echo $developer['Dates_To']; ?></td>
-                    <td><?php echo $developer['Total_No_Of_Days']; ?></td>
-                    <td><?php echo $developer['No_Of_Participants']; ?></td>
-                    <td>
-                        <a href="../../fdpadmins/fdp-sttp/uploadsfdporganised/<?php echo $developer['pdffile']; ?>" class="download" title="Download" data-toggle="tooltip">
-                            <i class="fa fa-download"></i>
-                        </a>
-                        <a class="edit btn-success editbtn" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
-                        <a class="delete btn-danger deletebtn" class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
-                    </td>
-                    <td>
-                                <?php if ($developer['STATUS'] == 'PENDING') { ?>
-                                    <form method="POST" action="approved.php">
-                                        <input type="hidden" name="id" value="<?php echo $developer['id']; ?>">
-                                        <input type="submit" name="approve" value="Approve">
-                                    </form>
-                                    <form method="post" action="reject.php">
-                                        <input type="hidden" name="id" value="<?php echo $developer['id']; ?>">
-                                        <button type="submit" name="reject" class="btn btn-danger">Send Back</button>
-                                    </form>
-                                <?php } elseif ($developer['STATUS'] == 'Sent Back') { ?>
-                                    <?php echo $developer['STATUS']; ?>
-                                    <form method="POST" action="approve-now.php">
-                                        <input type="hidden" name="id" value="<?php echo $developer['id']; ?>">
-                                        <input type="submit" name="approve_now" value="Approve Now">
-                                    </form>
-                                <?php } else { ?>
-                                    <?php echo $developer['STATUS']; ?>
-                                <?php } ?>
-                            </td>
-                        </tr>
-                    </tbody>
-                <?php
+                        <tbody> <!-- change -->
+                            <tr>
+                                <td> <?php echo $developer['id']; ?> </td>
+                                <td> <?php echo $developer['Academic_year']; ?> </td> 
+                                <td> <?php echo $developer['Branch']; ?> </td>
+                                <td> <?php echo $developer['Title_Of_Program']; ?> </td>
+                                <td> <?php echo $developer['Approving_Body']; ?> </td>
+                                <td> <?php echo $developer['Grant_Amount']; ?> </td>
+                                <td> <?php echo $developer['Convener_Of_FDP_STTP']; ?> </td>
+                                <td> <?php echo $developer['Dates_From']; ?> </td>
+                                <td> <?php echo $developer['Dates_To']; ?> </td>
+                                <td> <?php echo $developer['Total_No_Of_Days']; ?> </td>
+                                <td> <?php echo $developer['No_Of_Participants']; ?> </td>
+                                <td>
+                                    <a href="../../professors/fdp-sttp/uploadsfdporganised/<?php echo $developer['pdffile']; ?>"  class="download" title="Download" data-toggle="tooltip"><i class="fa fa-download"></i></a>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <?php           
+                    }
                 }
-            } else {
-                echo "No Record Found";
-            }
+                else 
+                {
+                    echo "No Record Found";
+                }
             ?>
-        </table>
-
-        <?php
-        // Approve button logic
-        if (isset($_POST['approve'])) {
-            $id = $_POST['id'];
-            $select = "UPDATE fdpsttporganised SET STATUS ='APPROVED' WHERE id='$id'";
-            $result = mysqli_query($connection, $select);
-            echo "Data Approved";
-            header("Location: index.php");
-        }
-
-        // Reject button logic
-        if (isset($_POST['reject'])) {
-            $id = $_POST['id'];
-            $select = "UPDATE fdpsttporganised SET STATUS ='Sent Back' WHERE id='$id'";
-            $result = mysqli_query($connection, $select);
-            echo "Data Rejected";
-            header("Location: index.php");
-        }
-
-        // Approve Now button logic
-if (isset($_POST['approve_now'])) {
-    $id = $_POST['id'];
-    $select = "UPDATE fdpsttporganised SET STATUS ='APPROVED' WHERE id='$id'";
-    $result = mysqli_query($connection, $select);
-    echo "Data Approved";
-    header("Location: index.php");
-}
-        ?>
-    </div>
-</div>
-     <!-- EDIT POP UP FORM  -->
-    <!-- this is edit data form Make changes to variables and placeholder, keep same variables -->
-    <div class="modal fade" id="editmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel"> Edit Data </h5> &nbsp;
-                    <h5 class="modal-title" id="exampleModalLabel"> (Please enter the dates again)</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-
-                <form action="updatecode.php" method="POST">
-
-                    <div class="modal-body">
-
-                        <input type="hidden" name="update_id" id="update_id">
-
-                        <div class="form-group">
-                            <label> Academic Year</label>
-                            <input id='Academic_year' type="text" name="Academic_year" class="form-control" placeholder="Enter Title" required>
-                        </div>
-                        
-                        <div class="form-group">
-    <label>Branch</label>
-    <select name="Branch" class="form-control" required >
-        <option value="">--Select Department--</option>
-        <?php
-        // Retrieve the department information from the session or any other method
-        $branch = $_SESSION['branch']; 
-
-       $branches = array("IT", "EXTC", "Mechanical", "Computers", "Electrical", "Humanities");
-foreach ($branches as $branchOption) {
-    $selected = ($branchOption == $branch) ? 'selected="selected"' : '';
-    echo '<option value="' . $branchOption . '" ' . $selected . '>' . $branchOption . '</option>';
-}
-
-        ?>
-    </select>
-</div>
-
-                        <div class="form-group">
-                            <label> Approving Body </label>
-                            <input id="Approving_Body" type="text" name="Approving Body" class="form-control" placeholder="AICTE/ISTE/Others" required>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label> If Sponsored, Enter Grant Amount </label>
-                            <input id='Grant_Amount' type="text" name="Grant_Amount" class="form-control" placeholder="Enter Grant Amount">
-                        </div>
-
-                        <div class="form-group">
-                            <label> Convener of FDP/STTP </label>
-                            <input id='Convener_Of_FDP_STTP' type="text" name="Convener_Of_FDP_STTP" class="form-control" placeholder="Enter Name of Convener">
-                        </div>
-
-                        <div class="form-group">
-                            <label> Starting Date </label>
-                            <input type="date" id="Dates_From" name="Dates_From" class="form-control" placeholder="Enter Start Date" max="<?php echo date('Y-m-d'); ?>"required>
-                        </div>
-
-                        <div class="form-group">
-                            <label> Ending Date </label>
-                            <input type="date" id="Dates_To" name="Dates_To" class="form-control" placeholder="Enter End Date" max="<?php echo date('Y-m-d'); ?>"required >
-                        </div>
-
-                        <div class="form-group">
-                            <label> Total Number of days of FDP/STTP </label>
-                            <input id='Total_No_Of_Days' type="text" name="Total_No_Of_Days" class="form-control" placeholder="Enter no of Days" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label> Number of Participants </label>
-                            <input id= "No_Of_Participants" type="text" name="No_Of_Participants" class="form-control" placeholder="Enter Number of Participants" required>
-                        </div>
-						
-                        
-
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" name="updatedata" class="btn btn-primary">Update Data</button>
-                    </div>
-                </form>
-
-            </div>
-        </div>
-    </div>
-       <!-- DELETE POP UP FORM  -->
-    <!-- dont make changes-->
-    <div class="modal fade" id="deletemodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel"> Delete Student Data </h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-
-                <form action="deletecode.php" method="POST">
-
-                    <div class="modal-body">
-
-                        <input type="hidden" name="delete_id" id="delete_id">
-
-                        <h4> Do you want to Delete this Data ??</h4>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal"> NO </button>
-                        <button type="submit" name="deletedata" class="btn btn-primary"> Yes, Delete it. </button>
-                    </div>
-                </form>
-
-            </div>
-        </div>
+                    </table>
+            
+        </div> 
     </div>
 
   
@@ -327,15 +155,13 @@ foreach ($branches as $branchOption) {
                             <th> END DATE </th>
                             <th> NO OF DAYS </th>
                             <th> PARTICIPANTS</th>
-                            <th> Action</th>
-                            <th> STATUS </th>
                         </tr>
                     <thead>       
 <?php 
     if (isset($_POST["submit"])) {
         $str = mysqli_real_escape_string($connection, $_POST["search"]);
 
-        $sth = "SELECT * FROM `fdpsttporganised`WHERE branch = '$branch' AND (Academic_year LIKE '%$str%' OR Approving_Body LIKE '%$str%' OR Title_Of_Program LIKE '%$str%' OR Convener_Of_FDP_STTP LIKE '%$str%'OR STATUS LIKE '$str')";
+        $sth = "SELECT * FROM `fdpsttporganised` WHERE Branch LIKE '%$branch%' AND (Academic_year LIKE '%$str%' OR Approving_Body LIKE '%$str%' OR Title_Of_Program LIKE '%$str%' OR Convener_Of_FDP_STTP LIKE '%$str%')";
         $result = mysqli_query($connection, $sth);
         $queryresult = mysqli_num_rows($result); ?>
 
@@ -364,34 +190,16 @@ foreach ($branches as $branchOption) {
                         <td> <?php echo $row['Total_No_Of_Days']; ?> </td>
                         <td> <?php echo $row['No_Of_Participants']; ?> </td>
                         <td>
-                        <a href="../../fdpadmins/fdp-sttp/uploadsfdporganised/<?php echo $row['pdffile']; ?>" class="download" title="Download" data-toggle="tooltip">
-                            <i class="fa fa-download"></i>
-                        </a>
-                        <a class="edit btn-success editbtn" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
-                        <a class="delete btn-danger deletebtn" class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
-                    </td>
-                    <td>
-                                <?php if ($row['STATUS'] == 'PENDING') { ?>
-                                    <form method="POST" action="approved.php">
-                                        <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
-                                        <input type="submit" name="approve" value="Approve">
-                                    </form>
-                                    <form method="post" action="reject.php">
-                                        <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
-                                        <button type="submit" name="reject" class="btn btn-danger">Send Back</button>
-                                    </form>
-                                <?php } elseif ($row['STATUS'] == 'Sent Back') { ?>
-                                    <?php echo $row['STATUS']; ?>
-                                    <form method="POST" action="approve-now.php">
-                                        <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
-                                        <input type="submit" name="approve_now" value="Approve Now">
-                                    </form>
-                                <?php } else { ?>
-                                    <?php echo $row['STATUS']; ?>
-                                <?php } ?>
-                            </td>
-                        </tr>
-                    </tbody>
+
+                            <a href="../../professors/fdp-sttp/<?php echo $row['pdffile']; ?>"  class="download" title="Download" data-toggle="tooltip"><i class="fa fa-download"></i></a>
+                           
+							
+                            
+                            
+                            <!-- <button class="btn"><i class="fa fa-download"></i> Download</button> -->
+                        </td>
+                    </tr> 
+                    <tbody>
                     <?php 
             }
 
@@ -402,6 +210,7 @@ foreach ($branches as $branchOption) {
     ?>
     </table>
     </div>
+
 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>

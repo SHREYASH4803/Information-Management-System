@@ -25,6 +25,7 @@ session_start();
 
 </head>
 
+
 <body>
     <?php include('../../header.php'); ?>
 
@@ -45,59 +46,53 @@ session_start();
 
                     <div class="modal-body">
 
-                    <div class="form-group">
-                            <label>Academic Year (July 1st -June 30th)*</label>
-                            <select name="Academic_year" class="form-control" required>
-                                <option value="">--Select Year--</option>
-                                <option name="Academic_year" value="2019-20">2019-20</option>
-                                <option name="Academic_year" value="2020-21">2020-21</option>
-                                <option name="Academic_year" value="2021-22">2021-22</option>
-                                <option name="Academic_year" value="2022-23">2022-23</option>
-                                <option name="Academic_year" value="2023-24">2023-24</option>
-                                <option name="Academic_year" value="2024-25">2024-25</option>
+                        <div class="form-group">
+                            <label>Year of Publication</label>
+                            <select name="Year_Of_Publication" class="form-control" required>
+                                <option value="Year_Of_Publication">--Select Year--</option>
+                                <option name="Year_Of_Publication" value="2017">2017</option>
+                                <option name="Year_Of_Publication" value="2018">2018</option>
+                                <option name="Year_Of_Publication" value="2019">2019</option>
+                                <option name="Year_Of_Publication" value="2020">2020</option>
+                                <option name="Year_Of_Publication" value="2021">2021</option>
+                                <option name="Year_Of_Publication" value="2022">2022</option>
                             </select>
                         </div>
 
                         <div class="form-group">
-                                <label>Branch</label>
-                                <select name="Branch" class="form-control" required disabled>
-                                    <option value="">--Select Department--</option>
-                                    <?php
-                                    // Retrieve the department information from the session or any other method
-                                    $branch = $_SESSION['branch']; 
-
-                                $branches = array("IT", "EXTC", "Mechanical", "Computers", "Electrical", "Humanities");
-                            foreach ($branches as $branchOption) {
-                                $selected = ($branchOption == $branch) ? 'selected="selected"' : '';
-                                echo '<option value="' . $branchOption . '" ' . $selected . '>' . $branchOption . '</option>';
-                            }
-
-                                    ?>
-                                </select>
-                            </div>
-
-                        <div class="form-group">
-                            <label> Name of the Teacher* </label>
-                            <input type="text" name="Name_Of_The_Teacher"   class="form-control" placeholder="Name of the teacher" required>
+                            <label>Branch</label>
+                            <select name="Branch" class="form-control" required>
+                                <option name="Branch" value="IT">IT</option>
+                                <option name="Branch" value="EXTC">EXTC</option>
+                                <option name="Branch" value="Mechanical">Mechanical</option>
+                                <option name="Branch" value="Computers">Computers</option>
+                                <option name="Branch" value="Electrical">Electrical</option>
+                                <option name="Branch" value="Humanities">Humanities</option>
+                            </select>
                         </div>
 
                         <div class="form-group">
-                            <label> Title of the Paper* </label>
-                            <input type="text" name="Title_Of_The_Paper"  class="form-control" placeholder="Title of the Paper ">
+                            <label> Name of the Teacher </label>
+                            <input type="text" name="Name_Of_The_Teacher" class="form-control" placeholder="Name of the teacher" required>
                         </div>
 
                         <div class="form-group">
-                            <label> Title of the proceedings of the conference* </label>
-                            <input type="text" name="Title_Of_The_Proceedings" class="form-control"  placeholder="Title of the proceedings of the conference" required>
+                            <label> Title of the Paper </label>
+                            <input type="text" name="Title_Of_The_Paper" class="form-control" placeholder="Title of the Paper ">
                         </div>
 
                         <div class="form-group">
-                            <label> Name of the Conference* </label>
-                            <input type="text" name="Name_Of_The_Conference"  class="form-control" placeholder="Name of the Conference" required>
+                            <label> Title of the proceedings of the conference </label>
+                            <input type="text" name="Title_Of_The_Proceedings" class="form-control" placeholder="Title of the proceedings of the conference" required>
                         </div>
 
                         <div class="form-group">
-                            <label>Select National/International*</label>
+                            <label> Name of the Conference </label>
+                            <input type="text" name="Name_Of_The_Conference" class="form-control" placeholder="Name of the Conference" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Select National/International</label>
                             <select name="National_Or_International" class="form-control" required>
                                 <option value="National_Or_International">--Select Publication--</option>
                                 <option name="National_Or_International" value="National">National</option>
@@ -105,67 +100,64 @@ session_start();
                             </select>
                         </div>
 
-
-                      <div class="form-group">
-                            <label> Year of Publication* </label>
-                            <input type="number" name="Year_Of_Publication" class="form-control"  placeholder="Enter Year of publication" required>
-                            
+                        <div class="form-group">
+                            <label> Name of Organizing Institute </label>
+                            <input type="text" name="Name_Of_Organizing_Institute" id="Name_Of_Organizing_Institute" class="form-control" placeholder="Enter Name of Organizing Institute" required>
                         </div>
+
 
                         <div class="form-group">
                             <label> Enter ISBN/ISSN number </label>
-                            <input type="text" name="ISBN_Or_ISSN_Number"  class="form-control" placeholder="Enter ISBN/ISSN number">
+                            <input type="number" name="ISBN_Or_ISSN_Number" class="form-control" placeholder="Enter ISBN/ISSN number" required>
                         </div>
 
                         <div class="form-group">
-                            <label> Affiliating Institute at the time of Publication* </label>
+                            <label> Affiliating Institute at the time of Publication </label>
                             <input type="text" name="Affiliating_Institute" class="form-control" placeholder="Affiliating Institute at the time of Publication" required>
                         </div>
 
                         <div class="form-group">
-                            <label> Name of the Publisher* </label>
+                            <label> Name of the Publisher </label>
                             <input type="text" name="Name_Of_Publisher" class="form-control" placeholder="Name of the Publisher" required>
                         </div>
 
-<!-- 
                         <div class="form-group">
-                            <label> INDEXING</label>
-                            <input type="text" name="Indexing" class="form-control" placeholder="Indexing" required>
-                        </div> -->
-
-
-                        <div class="form-group">
-                            <label>Indexing*</label>
-                            <select name="Indexing" class="form-control" required>
-                                <option value="">--Select--</option>
-                                <option value="SCI">SCI</option>
-                                <option value="ESCI">ESCI</option>
-                                <option value="SCOPUS">SCOPUS</option>
-                                <option value="WEB OF SCIENCE">WEB OF SCIENCE</option>
-                            
-                                <option value="other">Other</option> 
-                            </select>
+                            <label> Conference Date(From) </label>
+                            <input type="date" name="Conference_Date_From" class="form-control" placeholder="Conference Date(From)" required>
                         </div>
 
                         <div class="form-group">
-                            <label>  Any other Indexing </label>
-                            <input type="text" name="other"  class="form-control" placeholder="any other indexing other than mentioned above">
-                        </div>
-
-
-                        <div class="form-group">
-                            <label> Details of Paper Published(IEEE Format)* </label>
-                            <input type="text" name="Details_Of_Paper" class="form-control" placeholder="Enter details of paper" required>
+                            <label> Conference Date (To) </label>
+                            <input type="date" name="Conference_Date_To" class="form-control" placeholder="Conference Date (To)" required>
                         </div>
 
                         <div class="form-group">
-                            <label> Paper Weblink/ DOI </label>
-                            <input type="text" name="Paper_Weblink" class="form-control" placeholder="Enter Paper weblink/ DOI" required>
+                            <label> Name of the digital library hosting the paper(if any)</label>
+                            <input type="text" name="Name_Of_Library" class="form-control" placeholder="Name of the digital library hosting the paper(if any)">
                         </div>
 
-<!-- 
-                           <div class="form-group">
-                            <label> Conference paper </label>
+                        <div class="form-group">
+                            <label> Paper Webinar/DOI </label>
+                            <input type="text" name="Paper_Webinar" class="form-control" placeholder="Paper Webinar/DOI ">
+                        </div>
+
+                        <div class="form-group">
+                            <label> Conference Proceedings </label>
+                            <input type="text" name="Conference_Proceedings" class="form-control" placeholder="Conference Proceedings">
+                        </div>
+
+                        <div class="form-group">
+                            <label> Registration Amount received from FCRIT </label>
+                            <input type="number" name="Registration_Amount" class="form-control" placeholder="Registration Amount received from FCRIT">
+                        </div>
+
+                        <div class="form-group">
+                            <label> TA received from FCRIT </label>
+                            <input type="number" name="TA_Received" class="form-control" placeholder="TA received from FCRIT">
+                        </div>
+
+                        <div class="form-group">
+                            <label> Details of Paper Published(IEEE Format) </label>
                             <input type="file" name="pdffile1" id="pdffile1" required/><br>
                                     <img src="" id="pdf-file1-tag" width="100px" />
 
@@ -184,10 +176,10 @@ session_start();
                                             readURL(this);
                                         });
                                     </script><br>
-						</div> -->
+						</div>
                         <div class="form-group">
                             <label> Conference Paper </label>						
-						    <input type="file" name="pdffile2" id="pdffile2" accept="application/pdf"  /><br>
+						    <input type="file" name="pdffile2" id="pdffile2" required/><br>
                                     <img src="" id="pdf-file2-tag" width="100px" />
 
                                     <script type="text/javascript">
@@ -209,7 +201,7 @@ session_start();
                         
                         <div class="form-group">
                             <label> Conference Certificate </label>						
-						    <input type="file" name="pdffile3" id="pdffile3" accept="application/pdf" ><br>
+						    <input type="file" name="pdffile3" id="pdffile3"><br>
                                     <img src="" id="pdf-file3-tag" width="100px" />
 
                                     <script type="text/javascript">
@@ -229,7 +221,7 @@ session_start();
                                     </script><br>
 						</div>	
                         
-                        <!-- <div class="form-group">
+                        <div class="form-group">
                             <label> SoftCopy of Application Letter/Reimbursement Letter of Registration & TA amount </label>						
 						    <input type="file" name="pdffile4" id="pdffile4"><br>
                                     <img src="" id="pdf-file4-tag" width="100px" />
@@ -249,7 +241,7 @@ session_start();
                                             readURL(this);
                                         });
                                     </script><br>
-						</div> -->
+						</div>
 
                     </div>
                     <div class="modal-footer">
@@ -297,23 +289,17 @@ session_start();
  <!-- buttons and search buttoncard -->
             <div class="card">
                 <div class="card-body">
-              
+                <?php 
+                if($_SESSION["role"] == true) {
+                    echo "Welcome". " ".$_SESSION["role"] ;
+                } else {
+                    header("Location:index.php"); 
+                }
+                ?>
 
             <div class="card-body mt-5">
-                <h2> CONFERENCE PUBLICATION </h2>
+                <h2> Conference Publication </h2>
             </div>
-
-
-            <?php 
-if ($_SESSION["role"] == true) {
-    echo '<form action="https://ims.fcrit.ac.in/professors/dashboard.php" method="post" style="position: absolute; top: 100px; right: 70px;">
-            <button type="submit" class="btn btn-primary" style="background-color: blue; color: white;">HOME</button>
-          </form>';
-    
-    echo '<div style="position: absolute; top: 100px; right: 200px; font-weight: bold; color: #007bff;">Welcome ' . $_SESSION["role"] . '<br><span style="color: #008000;">You logged in as Professor</span></div>';
-} else {
-    header("Location: index.php");}
-?>
             <div class="card">
                 <div class="card-body btn-group">
                 <form action="<?php echo $_SERVER["PHP_SELF"]; ?>" method="post">
@@ -342,22 +328,27 @@ if ($_SESSION["role"] == true) {
                         <thead>
                             <tr>
                                 <th scope="col"> ID </th>
-                                <th scope="col"> ACADEMIC YEAR (JULY 1st -JUNE 30th )</th>
                                 <th scope="col"> NAME OF TEACHER </th>
+                                <th scope="col"> BRANCH </th>
                                 <th scope="col"> TITLE OF PAPER </th>
                                 <th scope="col"> TITLE OF THE PROCEEDINGS OF THE CONFERENCE </th>
                                 <th scope="col"> NAME OF THE CONFERENCE </th>
                                 <th scope="col"> NATIONAL/INTERNATIONAL </th>
-                                <th scope="col"> YEAR OF PUBLICATION </th>
-                                <th scope="col"> ISBN/ISSN NUMBER OF PROCEEDING </th>
+                                <th scope="col"> NAME OF ORGANIZING INSTITUTE WITH PLACE </th>
+								<th scope="col"> YEAR OF PUBLICATION </th>
+                                <th scope="col"> ISBN/ISSN </th>
                                 <th scope="col"> AFFILIATING INSTITUTE AT TIME OF PUBLICATION </th>
                                 <th scope="col"> NAME OF PUBLISHER </th>
-                                <th scope="col"> DETAILS OF PAPER PUBLISHED (IEEE FORMAT) WITH DATE  </th>
-                                <th scope="col"> INDEXING </th>
-                                <th scope="col"> OTHER INDEXING </th>
-                                <th scope="col"> PAPER WEBLINK / DOI</th>
+                                <th scope="col"> CONFERENCE DATE(FROM) </th>
+                                <th scope="col"> CONFERENCE DATE(TO) </th>
+                                <th scope="col"> NAME OF DIGITAL LIBRARY HOSTING THE PAPER(IF ANY) </th>
+                                <th scope="col"> PAPER WEBINAR/DOI </th>
+                                <th scope="col"> CONFERENCE PROCEEDINGS </th>
+                                <th scope="col"> REGISTRATION AMOUNT RECEIVED FROM FCRIT </th>
+                                <th scope="col"> TA RECEIVED FROM FRCIT </th>
+                                
                                 <th scope="col"> ACTION </th>
-                                <th scope="col"> STATUS </th>
+                               
                             </tr>
                         </thead>
                         
@@ -384,76 +375,59 @@ if ($_SESSION["role"] == true) {
                                             ?>
                         <tbody> <!-- change -->
                             <tr>
-                            <?php
-                $status = $developer['STATUS'];
-                $is_disabled = ($status == "approved") ? "disabled" : "";
-                // If STATUS is "approved", set the $is_disabled variable to "disabled"
-                ?>
-
                                 <td> <?php echo $developer['id']; ?> </td>
-                                <td> <?php echo $developer['Academic_year']; ?> </td> 
                                 <td> <?php echo $developer['Name_Of_The_Teacher']; ?> </td> 
+                                <td> <?php echo $developer['Branch']; ?> </td>
                                 <td> <?php echo $developer['Title_Of_The_Paper']; ?> </td>
                                 <td> <?php echo $developer['Title_Of_The_Proceedings']; ?> </td>
                                 <td> <?php echo $developer['Name_Of_The_Conference']; ?> </td>
                                 <td> <?php echo $developer['National_Or_International']; ?> </td>
-                                <td> <?php echo $developer['Year_Of_Publication']; ?> </td>
+                                <td> <?php echo $developer['Name_Of_Organizing_Institute']; ?> </td>
+								<td> <?php echo $developer['Year_Of_Publication']; ?> </td>
                                 <td> <?php echo $developer['ISBN_Or_ISSN_Number']; ?> </td>
                                 <td> <?php echo $developer['Affiliating_Institute']; ?> </td>
                                 <td> <?php echo $developer['Name_Of_Publisher']; ?> </td>
-                                <td> <?php echo $developer['Details_Of_Paper']; ?> </td>
-                                <td> <?php echo $developer['Indexing']; ?> </td>
-                                <td> <?php echo $developer['other']; ?> </td>
-                                <!-- <td> <?php echo $developer['Paper_Weblink']; ?> </td> -->
-                                <td><a href="<?php echo $developer['Paper_Weblink']; ?>" target="_blank"><?php echo $developer['Paper_Weblink']; ?></a></td>
-
-
-                            
+                                <td> <?php echo $developer['Conference_Date_From']; ?> </td>
+                                <td> <?php echo $developer['Conference_Date_To']; ?> </td>
+                                <td> <?php echo $developer['Name_Of_Library']; ?> </td>
+                                <td> <?php echo $developer['Paper_Webinar']; ?> </td>
+                                <td> <?php echo $developer['Conference_Proceedings']; ?> </td>
+                                <td> <?php echo $developer['Registration_Amount']; ?> </td>
+                                <td> <?php echo $developer['TA_Received']; ?> </td>
                                 <td>
                             <!--<a href="read.php?viewid=<?php echo htmlentities ($developer['id']);?>" class="view" title="View" data-toggle="tooltip"><i class="material-icons">&#xE417;</i></a>-->
-                            <!-- <a class="edit btn-success editbtn" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a> -->
-                            <!-- <a href="Paper_Details/<?php echo $developer['pdffile1']; ?>"  class="download" title="Download" data-toggle="tooltip"><i class="fa fa-download"></i></a> -->
+                            <a class="edit btn-success editbtn" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
+                            <a href="Paper_Details/<?php echo $developer['pdffile1']; ?>"  class="download" title="Download" data-toggle="tooltip"><i class="fa fa-download"></i></a>
 							<a href="Conference_Paper/<?php echo $developer['pdffile2']; ?>"  class="download" title="Download" data-toggle="tooltip"><i class="fa fa-download"></i></a>
                             <a href="Conference_Certificate/<?php echo $developer['pdffile3']; ?>"  class="download" title="Download" data-toggle="tooltip"><i class="fa fa-download"></i></a>
-                            <!-- <a href="Application_Letter/<?php echo $developer['pdffile4']; ?>"  class="download" title="Download" data-toggle="tooltip"><i class="fa fa-download"></i></a> -->
-                            <!-- <a class="delete btn-danger deletebtn" class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a> -->
+                            <a href="Application_Letter/<?php echo $developer['pdffile4']; ?>"  class="download" title="Download" data-toggle="tooltip"><i class="fa fa-download"></i></a>
+                            <a class="delete btn-danger deletebtn" class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
 							
-                            <?php if ($status == "approved") { ?>
-    <!-- Code for when the status is approved -->
-    <!-- You can hide the delete and edit buttons for the approved status -->
-<?php } elseif ($status == "Sent Back") { ?>
-    <!-- Code for when the status is sent back -->
-    <a class="edit btn-success editbtn" title="Edit" data-toggle="tooltip" <?php echo $is_disabled ?>>
-        <i class="material-icons">&#xE254;</i>
-    </a>
-<?php } else { ?>
-    <!-- Code for when the status is pending or any other status -->
-    <a class="edit btn-success editbtn" title="Edit" data-toggle="tooltip" <?php echo $is_disabled ?>>
-        <i class="material-icons">&#xE254;</i>
-    </a>
-    <a class="delete btn-danger deletebtn" title="Delete" data-toggle="tooltip" <?php echo $is_disabled ?>>
-        <i class="material-icons">&#xE872;</i>
-    </a>
-<?php } ?>
-                </td>
-
-                <td> <?php echo $status; ?> </td>
-            </tr>
-        </tbody>
-        <?php           
-    }
-}
-else 
-{
-    
-    echo "No Record Found";
-}
-?>
-
+                            
+                            
+                            <!-- <button class="btn"><i class="fa fa-download"></i> Download</button> -->
+                        </td>
+                                <!-- <td>
+                                    <button type="button" class="btn btn-success editbtn"> EDIT </button>
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn-danger deletebtn"> DELETE </button>
+                                </td> -->
+                            </tr>
+                        </tbody>
+                        <?php           
+                    }
+                }
+                else 
+                {
+                    echo "No Record Found";
+                }
+            ?>
                     </table>
             
         </div> 
     </div>
+
     <!-- EDIT POP UP FORM  -->
     <!-- this is edit data form Make changes to variables and placeholder, keep same variables -->
     <div class="modal fade" id="editmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -474,112 +448,97 @@ else
 
                         <input type="hidden" name="update_id" id="update_id">
 
-
                         <div class="form-group">
-                            <label> Academic Year </label>
-                            <input type="text"  id="Academic_year" name="Academic_year" class="form-control" required>
+                            <label> Year of Publication</label>
+                            <input id='Year_Of_Publication' type="text" name="Year_Of_Publication" class="form-control" placeholder="Enter Title" required>
                         </div>
                         
                         <div class="form-group">
-                            <label>Branch</label>
-                            <select name="Branch" class="form-control" required >
-                                <option value="">--Select Department--</option>
-                                <?php
-                                // Retrieve the department information from the session or any other method
-                                $branch = $_SESSION['branch']; 
-
-                            $branches = array("IT", "EXTC", "Mechanical", "Computers", "Electrical", "Humanities");
-                        foreach ($branches as $branchOption) {
-                            $selected = ($branchOption == $branch) ? 'selected="selected"' : '';
-                            echo '<option value="' . $branchOption . '" ' . $selected . '>' . $branchOption . '</option>';
-                        }
-
-                                ?>
-                            </select>
+                            <label> Branch/Department Name </label>
+                            <input id='Branch' type="text" name="Branch" class="form-control" placeholder="Enter Title" required>
                         </div>
 
                         <div class="form-group">
-                            <label> Name of the Teacher* </label>
+                            <label> Name of the Teacher </label>
                             <input type="text" id="Name_Of_The_Teacher" name="Name_Of_The_Teacher" class="form-control" placeholder="Name of the teacher" required>
                         </div>
 
                         <div class="form-group">
-                            <label> Title of the Paper* </label>
+                            <label> Title of the Paper </label>
                             <input type="text" id="Title_Of_The_Paper" name="Title_Of_The_Paper" class="form-control" placeholder="Title of the Paper " required>
                         </div>
 
                         <div class="form-group">
-                            <label> Title of the proceedings of the conference* </label>
+                            <label> Title of the proceedings of the conference </label>
                             <input type="text" id="Title_Of_The_Proceedings" name="Title_Of_The_Proceedings" class="form-control" placeholder="Title of the proceedings of the conference" required>
                         </div>
 
                         <div class="form-group">
-                            <label> Name of the Conference* </label>
+                            <label> Name of the Conference </label>
                             <input type="text" id="Name_Of_The_Conference" name="Name_Of_The_Conference" class="form-control" placeholder="Name of the Conference" required>
                         </div>
 
                         <div class="form-group">
-                            <label> National/International* </label>
+                            <label> National/International </label>
                             <input id='National_Or_International' type="text" name="National_Or_International" class="form-control" placeholder="Enter Title" required>
                         </div>
                         
                         <div class="form-group">
-                            <label> Year of Publication </label>
-                            <input type="text" id="Year_Of_Publication" name="Year_Of_Publication" class="form-control" placeholder="Enter Year of Publication" required>
+                            <label> Name of Organizing Institute </label>
+                            <input type="text" name="Name_Of_Organizing_Institute" id="Name_Of_Organizing_Institute" class="form-control" placeholder="Enter Name of Organizing Institute" required>
                         </div>
 
 
                         <div class="form-group">
                             <label> Enter ISBN/ISSN number </label>
-                            <input type="text" id="ISBN_Or_ISSN_Number" name="ISBN_Or_ISSN_Number" class="form-control" placeholder="Enter ISBN/ISSN number">
+                            <input type="number" id="ISBN_Or_ISSN_Number" name="ISBN_Or_ISSN_Number" class="form-control" placeholder="Enter ISBN/ISSN number" required>
                         </div>
 
                         <div class="form-group">
-                            <label> Affiliating Institute at the time of Publication* </label>
+                            <label> Affiliating Institute at the time of Publication </label>
                             <input type="text" id="Affiliating_Institute" name="Affiliating_Institute" class="form-control" placeholder="Affiliating Institute at the time of Publication" required>
                         </div>
 
                         <div class="form-group">
-                            <label> Name of the Publisher* </label>
+                            <label> Name of the Publisher </label>
                             <input type="text" id="Name_Of_Publisher" name="Name_Of_Publisher" class="form-control" placeholder="Name of the Publisher" required>
                         </div>
 
                         <div class="form-group">
-                            <label> Indexing </label>
-                            <input type="text" id="Indexing" name="Indexing" class="form-control" placeholder="Indexing" required>
+                            <label> Conference Date(From) </label>
+                            <input type="date" id="Conference_Date_From" name="Conference_Date_From" class="form-control" placeholder="Conference Date(From)" required>
                         </div>
-
-                        <!-- <div class="form-group">
-                            <label>Indexing*</label>
-                            <select name="Indexing" class="form-control" id="Indexing" required>
-                                <option value="">--Select--</option>
-                                <option value="SCI">SCI</option>
-                                <option value="ESCI">ESCI</option>
-                                <option value="SCOPUS">SCOPUS</option>
-                                <option value="WEB OF SCIENCE">WEB OF SCIENCE</option>
-                            
-                                <option value="other">Other</option> 
-                            </select>
-                        </div> -->
 
                         <div class="form-group">
-                            <label>  Any other Indexing </label>
-                            <input type="text" name="other"  class="form-control" placeholder="any other indexing other than mentioned above">
+                            <label> Conference Date (To) </label>
+                            <input type="date" id="Conference_Date_To" name="Conference_Date_To" class="form-control" placeholder="Conference Date (To)" required>
                         </div>
-
-                      
 
                         <div class="form-group">
-                            <label> Datails of Paper Published(IEEE Format)* </label>
-                            <input type="text" id="Details_Of_Paper" name="Details_Of_Paper" class="form-control" placeholder="Enter details of paper" required>
+                            <label> Name of the digital library hosting the paper(if any)</label>
+                            <input type="text" name="Name_Of_Library" class="form-control" placeholder="Name of the digital library hosting the paper(if any)">
                         </div>
 
-                  
                         <div class="form-group">
-                            <label> Paper Weblink/ DOI </label>
-                            <input type="text" id="Paper_Weblink" name="Paper_Weblink" class="form-control" placeholder="Enter Paper weblink/ DOI" required>
+                            <label> Paper Webinar/DOI </label>
+                            <input type="text" id="" name="Paper_Webinar" class="form-control" placeholder="Paper Webinar/DOI " required>
                         </div>
-                        
+
+                        <div class="form-group">
+                            <label> Conference Proceedings </label>
+                            <input type="text" id="Conference_Proceedings" name="Conference_Proceedings" class="form-control" placeholder="Conference Proceedings" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label> Registration Amount received from FCRIT </label>
+                            <input type="number" id="Registration_Amount" name="Registration_Amount" class="form-control" placeholder="Registration Amount received from FCRIT" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label> TA received from FCRIT </label>
+                            <input type="number" id="TA_Received" name="TA_Received" class="form-control" placeholder="TA received from FCRIT" required>
+                        </div>
+						
                         
 
                     </div>
@@ -599,31 +558,32 @@ else
                     <table class="table table-bordered ">
                     <thead>
                         <tr>
-                        <th scope="col"> ID </th>
-                                <th > ACADEMIC YEAR (JULY 1st -JUNE 30th )</th>
-                                <th > NAME OF TEACHER </th>
-                                <th > TITLE OF PAPER </th>
-                                <th > TITLE OF THE PROCEEDINGS OF THE CONFERENCE </th>
-                                <th > NAME OF THE CONFERENCE </th>
-                                <th > NATIONAL/INTERNATIONAL </th>
-                                <th > YEAR OF PUBLICATION </th>
-                                <th > ISBN/ISSN NUMBER OF PROCEEDING </th>
-                                <th > AFFILIATING INSTITUTE AT TIME OF PUBLICATION </th>
-                                <th > NAME OF PUBLISHER </th>
-                                <th > DETAILS OF PAPER PUBLISHED (IEEE FORMAT) WITH DATE  </th>
-                                <th > INDEXING </th>
-                                <th > OTHER INDEXING </th>
-                                <th > PAPER WEBLINK / DOI</th>
-                                <th > ACTION </th>
-                                <th > STATUS </th>
-
+                            <th> ID </th>
+                            <th> NAME OF TEACHER </th>
+                            <th> BRANCH </th>
+                            <th> TITLE OF PAPER </th>
+                            <th> TITLE OF THE PROCEEDINGS OF THE CONFERENCE </th>
+                            <th> NAME OF THE CONFERENCE </th>
+                            <th> NATIONAL/INTERNATIONAL </th>
+                            <th> NAME OF ORGANIZING INSTITUTE WITH PLACE </th>
+					        <th> YEAR OF PUBLICATION </th>
+                            <th> ISBN/ISSN </th>
+                            <th> AFFILIATING INSTITUTE AT TIME OF PUBLICATION </th>
+                            <th> NAME OF PUBLISHER </th>
+                            <th> CONFERENCE DATE(FROM) </th>
+                            <th> CONFERENCE DATE(TO) </th>
+                            <th> NAME OF DIGITAL LIBRARY HOSTING THE PAPER(IF ANY) </th>
+                            <th> PAPER WEBINAR/DOI </th>
+                            <th> CONFERENCE PROCEEDINGS </th>
+                            <th> REGISTRATION AMOUNT RECEIVED FROM FCRIT </th>
+                            <th> TA RECEIVED FROM FRCIT </th>
                         </tr>
-</thead>       
+                    <thead>       
 <?php 
     if (isset($_POST["submit"])) {
         $str = mysqli_real_escape_string($connection, $_POST["search"]);
 
-        $sth = "SELECT * FROM `conferencepublication` WHERE user_id=$id AND (Academic_year LIKE '%$str%' OR  Name_Of_The_Teacher LIKE '%$str%' OR Title_Of_The_Paper LIKE '%$str%' OR Title_Of_The_Proceedings LIKE '%$str%' OR  Name_Of_The_Conference LIKE '%$str%' OR National_Or_International LIKE '%$str%'  OR Year_Of_Publication LIKE '%$str%' OR ISBN_Or_ISSN_Number LIKE '%$str%' OR Affiliating_Institute LIKE '%$str%' OR Name_Of_Publisher LIKE '%$str%' OR Details_Of_Paper LIKE '%$str%' OR Paper_Weblink LIKE '%$str%' OR Indexing LIKE '%$str%' OR STATUS LIKE '$str')";
+        $sth = "SELECT * FROM `conferencepublication` WHERE user_id=$id AND (Branch LIKE '%$str%' OR Name_Of_The_Teacher LIKE '%$str%' OR Title_Of_The_Paper LIKE '%$str%' OR Title_Of_The_Proceedings LIKE '%$str%' OR  Name_Of_The_Conference LIKE '%$str%' OR National_Or_International LIKE '%$str%' OR Name_Of_Organizing_Institute LIKE '%$str%' OR Year_Of_Publication LIKE '%$str%' OR ISBN_Or_ISSN_Number LIKE '%$str%' OR Affiliating_Institute LIKE '%$str%' OR Name_Of_Publisher LIKE '%$str%' OR Name_Of_Library LIKE '%$str%' OR Paper_Webinar LIKE '%$str%' OR Conference_Proceedings LIKE '%$str%' OR Registration_Amount LIKE '%$str%' OR TA_Received LIKE '%$str%')";
         $result = mysqli_query($connection, $sth);
         $queryresult = mysqli_num_rows($result); ?>
 
@@ -639,59 +599,39 @@ else
                     ?>
                     <tbody id="srch"> 
              
-                    <tr>    
-                    <?php
-                $status = $row['STATUS'];
-                $is_disabled = ($status == "approved") ? "disabled" : "";
-                // If STATUS is "approved", set the $is_disabled variable to "disabled"
-                ?>              
-                       
-                       <td> <?php echo $row['id']; ?> </td>
-                                <td> <?php echo $row['Academic_year']; ?> </td> 
-                                <td> <?php echo $row['Name_Of_The_Teacher']; ?> </td> 
-                                <td> <?php echo $row['Title_Of_The_Paper']; ?> </td>
-                                <td> <?php echo $row['Title_Of_The_Proceedings']; ?> </td>
-                                <td> <?php echo $row['Name_Of_The_Conference']; ?> </td>
-                                <td> <?php echo $row['National_Or_International']; ?> </td>
-                                <td> <?php echo $row['Year_Of_Publication']; ?> </td>
-                                <td> <?php echo $row['ISBN_Or_ISSN_Number']; ?> </td>
-                                <td> <?php echo $row['Affiliating_Institute']; ?> </td>
-                                <td> <?php echo $row['Name_Of_Publisher']; ?> </td>
-                                <td> <?php echo $row['Details_Of_Paper']; ?> </td>
-                                <td> <?php echo $row['Indexing']; ?> </td>
-                                <td> <?php echo $row['other']; ?> </td>
-                                <td><a href="<?php echo $row['Paper_Weblink']; ?>" target="_blank"><?php echo $row['Paper_Weblink']; ?></a></td>
-                        
+                    <tr>                
+                        <td> <?php echo $row['id']; ?> </td>
+                        <td> <?php echo $row['Name_Of_The_Teacher']; ?> </td> 
+                        <td> <?php echo $row['Branch']; ?> </td>
+                        <td> <?php echo $row['Title_Of_The_Paper']; ?> </td>
+                        <td> <?php echo $row['Title_Of_The_Proceedings']; ?> </td>
+                        <td> <?php echo $row['Name_Of_The_Conference']; ?> </td>
+                        <td> <?php echo $row['National_Or_International']; ?> </td>
+                        <td> <?php echo $row['Name_Of_Organizing_Institute']; ?> </td>
+						<td> <?php echo $row['Year_Of_Publication']; ?> </td>
+                        <td> <?php echo $row['ISBN_Or_ISSN_Number']; ?> </td>
+                        <td> <?php echo $row['Affiliating_Institute']; ?> </td>
+                        <td> <?php echo $row['Name_Of_Publisher']; ?> </td>
+                        <td> <?php echo $row['Conference_Date_From']; ?> </td>
+                        <td> <?php echo $row['Conference_Date_To']; ?> </td>
+                        <td> <?php echo $row['Name_Of_Library']; ?> </td>
+                        <td> <?php echo $row['Paper_Webinar']; ?> </td>
+                        <td> <?php echo $row['Conference_Proceedings']; ?> </td>
+                        <td> <?php echo $row['Registration_Amount']; ?> </td>
+                        <td> <?php echo $row['TA_Received']; ?> </td>
                         <td>
 
-                            <!-- <a class="edit btn-success editbtn" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a> -->
-                            <!-- <a href="Paper_Details/<?php echo $row['pdffile1']; ?>"  class="download" title="Download" data-toggle="tooltip"><i class="fa fa-download"></i></a> -->
+                            <a class="edit btn-success editbtn" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
+                            <a href="Paper_Details/<?php echo $row['pdffile1']; ?>"  class="download" title="Download" data-toggle="tooltip"><i class="fa fa-download"></i></a>
 							<a href="Conference_Paper/<?php echo $row['pdffile2']; ?>"  class="download" title="Download" data-toggle="tooltip"><i class="fa fa-download"></i></a>
                             <a href="Conference_Certificate/<?php echo $row['pdffile3']; ?>"  class="download" title="Download" data-toggle="tooltip"><i class="fa fa-download"></i></a>
-                            <!-- <a href="Application_Letter/<?php echo $row['pdffile4']; ?>"  class="download" title="Download" data-toggle="tooltip"><i class="fa fa-download"></i></a> -->
-                            <!-- <a class="delete btn-danger deletebtn" class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a> -->
+                            <a href="Application_Letter/<?php echo $row['pdffile4']; ?>"  class="download" title="Download" data-toggle="tooltip"><i class="fa fa-download"></i></a>
+                            <a class="delete btn-danger deletebtn" class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
 							
-                         
-                            <?php if ($status == "approved") { ?>
-    <!-- Code for when the status is approved -->
-    <!-- You can hide the delete and edit buttons for the approved status -->
-<?php } elseif ($status == "Sent Back") { ?>
-    <!-- Code for when the status is sent back -->
-    <a class="edit btn-success editbtn" title="Edit" data-toggle="tooltip" <?php echo $is_disabled ?>>
-        <i class="material-icons">&#xE254;</i>
-    </a>
-<?php } else { ?>
-    <!-- Code for when the status is pending or any other status -->
-    <a class="edit btn-success editbtn" title="Edit" data-toggle="tooltip" <?php echo $is_disabled ?>>
-        <i class="material-icons">&#xE254;</i>
-    </a>
-    <a class="delete btn-danger deletebtn" title="Delete" data-toggle="tooltip" <?php echo $is_disabled ?>>
-        <i class="material-icons">&#xE872;</i>
-    </a>
-<?php } ?>
-
-                            </td>
-                        <td> <?php echo $row['STATUS']; ?> </td>
+                            
+                            
+                            <!-- <button class="btn"><i class="fa fa-download"></i> Download</button> -->
+                        </td>
                     </tr> 
                     <tbody>
                     <?php 
@@ -704,7 +644,6 @@ else
     ?>
     </table>
     </div>
-
 
 
 
@@ -763,22 +702,24 @@ else
                 console.log(data);
                 //chnage this keep same variable as above
                 $('#update_id').val(data[0]);
-                $('#Academic_year').val(data[1]);
-                $('#Name_Of_The_Teacher').val(data[2]);
-                
+                $('#Name_Of_The_Teacher').val(data[1]);
+                $('#Branch').val(data[2]);
                 $('#Title_Of_The_Paper').val(data[3]);
                 $('#Title_Of_The_Proceedings').val(data[4]);
                 $('#Name_Of_The_Conference').val(data[5]);
                 $('#National_Or_International').val(data[6]);
-               
-				$('#Year_Of_Publication').val(data[7]);
-                $('#ISBN_Or_ISSN_Number').val(data[8]);
-                $('#Affiliating_Institute').val(data[9]);
-                $('#Name_Of_Publisher').val(data[10]);
-                $('#Details_Of_Paper').val(data[11]);
-                $('#Indexing').val(data[12]);
-                $('#Paper_Weblink').val(data[13]);
-              
+                $('#Name_Of_Organizing_Institute').val(data[7]);
+				$('#Year_Of_Publication').val(data[8]);
+                $('#ISBN_Or_ISSN_Number').val(data[9]);
+                $('#Affiliating_Institute').val(data[10]);
+                $('#Name_Of_Publisher').val(data[11]);
+                $('#Conference_Date_From').val(data[12]);
+                $('#Conference_Date_To').val(data[13]);
+                $('#Name_Of_Library').val(data[14]);
+                $('#Paper_Webinar').val(data[15]);
+                $('#Conference_Proceedings').val(data[16]);
+                $('#Registration_Amount').val(data[17]);
+                $('#TA_Received').val(data[18]);
             });
         });
     </script>
@@ -796,7 +737,6 @@ else
     function downloadCSVuser(csv, filename) {  
         var csvFile;  
         var downloadLink;  
-        csv = '\uFEFF' + csv;
 
         //define the file type to text/csv  
         csvFile = new Blob([csv], {type: 'text/csv'});  
@@ -817,20 +757,12 @@ else
     var rows = x.querySelectorAll("table tr");  
 
     //merge the whole data in tabular form   
-    for (var i = 0; i < rows.length; i++) {  
-    var row = [];
-    var cols = rows[i].querySelectorAll("td, th");  
-    for (var j = 1; j < cols.length - 2; j++) {
-        // Check if the cell value contains a comma, if so, wrap it in double quotes
-        var cellValue = cols[j].innerText;
-        if (cellValue.includes(',')) {
-            row.push('"' + cellValue + '"');
-        } else {
-            row.push(cellValue);
-        }
-    }
-    csv.push(row.join(","));
-}
+    for(var i=0; i<rows.length; i++) {  
+        var row = [], cols = rows[i].querySelectorAll("td, th");  
+        for( var j=1; j<cols.length-1; j++)  
+        row.push(cols[j].innerText);  
+        csv.push(row.join(","));  
+    }   
     //call the function to download the CSV file  
     downloadCSVuser(csv.join("\n"), filename);  
     }  
@@ -841,7 +773,6 @@ else
     function downloadCSV(csv, filename) {  
         var csvFile;  
         var downloadLink;  
-        csv = '\uFEFF' + csv;
 
         //define the file type to text/csv  
         csvFile = new Blob([csv], {type: 'text/csv'});  
@@ -862,20 +793,12 @@ else
     var rows = x.querySelectorAll("table tr");  
 
     //merge the whole data in tabular form   
-    for (var i = 0; i < rows.length; i++) {  
-    var row = [];
-    var cols = rows[i].querySelectorAll("td, th");  
-    for (var j = 1; j < cols.length - 2; j++) {
-        // Check if the cell value contains a comma, if so, wrap it in double quotes
-        var cellValue = cols[j].innerText;
-        if (cellValue.includes(',')) {
-            row.push('"' + cellValue + '"');
-        } else {
-            row.push(cellValue);
-        }
-    }
-    csv.push(row.join(","));
-}
+    for(var i=0; i<rows.length; i++) {  
+        var row = [], cols = rows[i].querySelectorAll("td, th");  
+        for( var j=1; j<cols.length-1; j++)  
+        row.push(cols[j].innerText);  
+        csv.push(row.join(","));  
+    }   
     //call the function to download the CSV file  
     downloadCSV(csv.join("\n"), filename);  
     }  

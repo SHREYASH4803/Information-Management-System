@@ -2,16 +2,16 @@
 include('../../config.php');
 session_start();
 ?>
+
 <!DOCTYPE html> 
 
 <html lang="en">
 
-<!-- Giitbygby -->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title> Research Projects & Consultancies </title>
+    <title>RESEARCH PROJECT / CONSULTANCIES</title>
 
     <link rel="stylesheet" href="styles.css">
     
@@ -29,287 +29,121 @@ session_start();
 
 <body>
 
-<?php include('../../header.php'); ?>
 
- <!-- main card -->
- <!-- buttons and search buttoncard -->
-            <div class="card">
-                <div class="card-body">
-             
-            <div class="card-body mt-5">
-                <h2> Research Projects / Consultancies </h2>
-            </div>
+    <?php include('../../header.php'); ?>
 
-            <?php 
-if ($_SESSION["role"] == true) {
-    echo '<div style="position: absolute; top: 100px; right: 70px; font-weight: bold; color: #007bff;">Welcome ' . $_SESSION["role"] . '<br><span style="color: #008000;">You logged in as Branchadmin</span></div>';
-} else {
-    header("Location: index.php"); 
-}
-?>
-            <div class="card">
-                <div class="card-body btn-group">
-                
-            <form action="<?php echo $_SERVER["PHP_SELF"]; ?>" method="post">					
-				<button type="submit" onclick="exportTableToCSVuser('USerData_ResearchProjects&Consultancies.csv')" class="btn btn-success">Export to excel</button>
-			</form> &nbsp; &nbsp; 
-        
-            <form method="post">
-                <label>Search</label>
-                <input type="text" name="search">
-                <input type="submit" name="submit">
-            </form>
-            </div>
-            </div>
-
-             <!-- table -->
-            <div id="tabledataid" class="card">
-                <div class="card-body">
-                      <!-- th change -->
-                    <table id="datatableid" class="table table-bordered table-dark mt-2">
-                        <thead>
-                            <tr>
-                            <th scope="col"> ID </th>
-                            <th scope="col"> ACADEMIC YEAR (JULY 1st -JUNE 30th )</th>
-                                <th scope="col"> NATURE </th>
-                                <th scope="col"> NAME OF THE PROJECT/ENDOWNMENTS ,CHAIRS</th>
-                                <th scope="col"> NAME OF THE PRINCIPAL INVESTIGATOR/CO-INVESTIGATOR </th>
-                                <th scope="col"> DEPARTMENT OF PRINCIPAL INVESTIGATOR </th>
-                                <th scope="col"> YEAR OF AWARD </th>
-                                <th scope="col"> AMOUNT SANCTIONED </th>
-                                <th scope="col"> DURATION OF THE PROJECT </th>
-								<th scope="col"> NAME OF THE FUNDING AGENCY </th>
-                                <th scope="col"> FUNDING AGENCY WEBSITE LINK </th>
-                                <th scope="col"> TYPE(GOVT./NON-GOVT.) </th>
-                                <th scope="col"> UPLOAD THE RELEVANT DOCUMENT </th>
-                                <th scope="col"> STATUS </th>
-                            </tr>
-                        </thead>
-                        
-                        <?php
-                        $user = $_SESSION["role"];
-                        
-                        $result = "SELECT * FROM branchadmins WHERE username = '$user'";
-
-                        $query = mysqli_query($connection, $result);
-                        $queryresult = mysqli_num_rows($query); 
-                            if($queryresult > 0){
-                                while($row = mysqli_fetch_assoc($query)){ 
-                                    $id = $row['id'];
-                                    $branch = $row['branch'];
-                                }  
-                            }
-
-                        
-                        $table_query = "SELECT * FROM researchprojectconsultancies WHERE branch = '$branch' ORDER BY id ASC";  
-                        $query_run = mysqli_query($connection, $table_query);
-                        $query_result = mysqli_num_rows($query_run); ?>
-
-                        <?php if($query_result > 0){
-                                        while($developer = mysqli_fetch_assoc($query_run)){   
-                                            ?>
-                        <tbody> <!-- change -->
-                            <tr>
-                                <td> <?php echo $developer['id']; ?> </td> 
-                                <td> <?php echo $developer['Academic_year']; ?> </td> 
-                                <td> <?php echo $developer['Type_Research_Project_Consultancy']; ?> </td> 
-                                <td> <?php echo $developer['Name_Of_Project_Endownment']; ?> </td> 
-                                <td> <?php echo $developer['Name_Of_Principal_Investigator_CoInvestigator']; ?> </td>
-                                <td> <?php echo $developer['Department_Of_Principal_Investigator']; ?> </td>
-                                <td> <?php echo $developer['Year_Of_Award']; ?> </td>
-                                <td> <?php echo $developer['Amount_Sanctioned']; ?> </td>
-                                <td> <?php echo $developer['Duration_Of_The_Project']; ?> </td>
-                                <td> <?php echo $developer['Name_Of_The_Funding_Agency']; ?> </td>
-                                
-                                <td><a href="<?php echo $developer['Funding_Agency_Website_Link']; ?>" target="_blank"><?php echo $developer['Funding_Agency_Website_Link']; ?></a></td>
-                                <td> <?php echo $developer['Type_Govt_NonGovt']; ?> </td>
-                                <td>
-                                <a href="../../fdpadmins/researchprojects-consultancies/uploadsindex1/<?php echo $developer['pdffile1']; ?>"  class="download" title="Download" data-toggle="tooltip">
-                            <i class="fa fa-download"></i>
-                             <a class="edit btn-success editbtn" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
-                                <a class="delete btn-danger deletebtn" class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
-                            <td>
-                                <?php if ($developer['STATUS'] == 'PENDING') { ?>
-                                    <form method="POST" action="approved.php">
-                                        <input type="hidden" name="id" value="<?php echo $developer['id']; ?>">
-                                        <input type="submit" name="approve" value="Approve">
-                                    </form>
-                                    <form method="post" action="reject.php">
-                                        <input type="hidden" name="id" value="<?php echo $developer['id']; ?>">
-                                        <button type="submit" name="reject" class="btn btn-danger">Send Back</button>
-                                    </form>
-                                <?php } elseif ($developer['STATUS'] == 'Sent Back') { ?>
-                                    <?php echo $developer['STATUS']; ?>
-                                    <form method="POST" action="approve-now.php">
-                                        <input type="hidden" name="id" value="<?php echo $developer['id']; ?>">
-                                        <input type="submit" name="approve_now" value="Approve Now">
-                                    </form>
-                                <?php } else { ?>
-                                    <?php echo $developer['STATUS']; ?>
-                                <?php } ?>
-                            </td>
-     
-
-                </tr>
-            </tbody>
-                        <?php         
-
-                    }
-                    
-                }
-                else 
-                {
-                    echo "No Record Found";
-                }
-            ?>
-                    </table>
-
-                    <?php
-        // Approve button logic
-        if (isset($_POST['approve'])) {
-            $id = $_POST['id'];
-            $select = "UPDATE bookschapter SET STATUS ='APPROVED' WHERE id='$id'";
-            $result = mysqli_query($connection, $select);
-            echo "Data Approved";
-            header("Location: index.php");
-        }
-
-        // Reject button logic
-        if (isset($_POST['reject'])) {
-            $id = $_POST['id'];
-            $select = "UPDATE bookschapter SET STATUS ='Sent Back' WHERE id='$id'";
-            $result = mysqli_query($connection, $select);
-            echo "Data Rejected";
-            header("Location: index.php");
-        }
-
-        // Approve Now button logic
-if (isset($_POST['approve_now'])) {
-    $id = $_POST['id'];
-    $select = "UPDATE bookschapter SET STATUS ='APPROVED' WHERE id='$id'";
-    $result = mysqli_query($connection, $select);
-    echo "Data Approved";
-    header("Location: index.php");
-}
-        ?>
-            
-        </div> 
-    </div>
- <!-- EDIT POP UP FORM  -->
-    <!-- this is edit data form Make changes to variables and placeholder, keep same variables -->
-    <div class="modal fade" id="editmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    <!-- Modal -->
+    <!-- this is add data form Make changes to variables, keep same variables -->
+    <div class="modal fade mt-2" id="studentaddmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel"> Edit Data </h5> &nbsp;
-                    <h5 class="modal-title" id="exampleModalLabel"> (Please enter the dates again)</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Add Data </h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
 
-                <form action="updatecode.php" method="POST">
+                <form action="insertcode.php" method="POST" enctype="multipart/form-data" >
 
                     <div class="modal-body">
 
-                        <input type="hidden" name="update_id" id="update_id">
-
-                        <!-- <div class="form-group">
+                        <div class="form-group">
                             <label>Select Research Project/Consultancy</label>
                             <select name="Type_Research_Project_Consultancy" class="form-control" required>
                                 <option value="">--Select Type of Research--</option>
-                                <option name="Type_Research_Project_Consultancy" id="Type_Research_Project_Consultancy" value="Research Project">Research Project</option>
-                                <option name="Type_Research_Project_Consultancy" id="Type_Research_Project_Consultancy" value="Research Consultancy">Research Consultancy</option>
+                                <option name="Type_Research_Project_Consultancy" value="Research Project">Research Project</option>
+                                <option name="Type_Research_Project_Consultancy" value="Research Consultancy">Research Consultancy</option>
                             </select>
-                        </div> -->
-                        <div class="form-group">
-                            <label> Academic Year* </label>
-                            <input type="text"  id="Academic_year" name="Academic_year" class="form-control" required>
                         </div>
 
+                    
                         <div class="form-group">
-                            <label> Nature* </label>
-                            <input type="text"  id="Type_Research_Project_Consultancy" name="Type_Research_Project_Consultancy" class="form-control" required>
-                        </div>
-
-
-
-                        <div class="form-group">
-    <label>Branch</label>
-    <select name="Branch" class="form-control" required >
-        <option value="">--Select Department--</option>
-        <?php
-        // Retrieve the department information from the session or any other method
-        $branch = $_SESSION['branch']; 
-
-       $branches = array("IT", "EXTC", "Mechanical", "Computers", "Electrical", "Humanities");
-foreach ($branches as $branchOption) {
-    $selected = ($branchOption == $branch) ? 'selected="selected"' : '';
-    echo '<option value="' . $branchOption . '" ' . $selected . '>' . $branchOption . '</option>';
-}
-
-        ?>
-    </select>
-</div>
-
-                        <div class="form-group">
-                            <label> Name of the Project/Endownments,chairs </label>
-                            <input type="text" name="Name_Of_The_Project_Endownment" id="Name_Of_The_Project_Endownment"class="form-control" placeholder="Name of the Project/Endownment" required>
+                            <label> Name of the Project/Endownments </label>
+                            <input type="text" name="Name_Of_Project_Endownment" class="form-control" placeholder="Name of the Project Endownment" required>
                         </div>
 
                         <div class="form-group">
                             <label> Name of the Principal Investigator/Co-investigator </label>
-                            <input type="text" name="Name_Of_The_Principal_Investigator_CoInvestigator" id="Name_Of_The_Principal_Investigator_CoInvestigator"class="form-control" placeholder="Name of the Principal Investigator/Co-Investigator" required>
+                            <input type="text" name="Name_Of_Principal_Investigator_CoInvestigator" class="form-control" placeholder="Name of the Principal Investigator CoInvestigator" required>
                         </div>
 
                         <div class="form-group">
                             <label> Department of Principal Investigator </label>
-                            <input type="text" name="Department_Of_Principal_Investigator" id="Department_Of_Principal_Investigator"class="form-control" placeholder="Department of Principal Investigator">
+                            <input type="text" name="Department_Of_Principal_Investigator" class="form-control" placeholder="Department of Principal Investigator">
                         </div>
 
                         <div class="form-group">
                             <label> Year of Award</label>
-                            <input type="text" name="Year_Of_Award" id="Year_Of_Award"class="form-control" placeholder="Year of Award" required>
+                            <input type="text" name="Year_Of_Award" class="form-control" placeholder="Year of Award" required>
                         </div>
 
                         <div class="form-group">
                             <label> Amount Sanctioned</label>
-                            <input type="text" name="Amount_Sanctioned" id="Amount_Sanctioned"class="form-control" placeholder="Amount Sanctioned" required>
+                            <input type="text" name="Amount_Sanctioned" class="form-control" placeholder="Amount Sanctioned" required>
                         </div>
 
                         <div class="form-group">
                             <label>Duration of the project</label>
-                            <input type="text" name="Duration_Of_The_Project" id="Duration_Of_The_Project"class="form-control" placeholder="Duration of project" required>
+                            <input type="text" name="Duration_Of_The_Project" class="form-control" placeholder="Duration of project" required>
                         </div>
 
                         <div class="form-group">
                             <label>Name of the Funding Agency</label>
-                            <input type="text" name="Name_Of_The_Funding_Agency" id="Name_Of_The_Funding_Agency"class="form-control" placeholder="Enter Name of Agency" required>
+                            <input type="text" name="Name_Of_The_Funding_Agency" class="form-control" placeholder="Enter Name of Agency" required>
                         </div>
 
                         <div class="form-group">
                             <label>Funding agency website link</label>
-                            <input type="text" name="Funding_Agency_Website_Link" id="Funding_Agency_Website_Link"class="form-control" placeholder="Enter Link" required>
+                            <input type="text" name="Funding_Agency_Website_Link" class="form-control" placeholder="Enter Link" required>
                         </div>
 
-                      
                         <div class="form-group">
-                            <label>Select Govt/Non-Govt*</label>
-                            <input type="text" name="Type_Govt_NonGovt" id="Type_Govt_NonGovt"class="form-control" placeholder="Enter Type">
+                            <label>Select Govt./Non-Govt.</label>
+                            <select name="Type_Govt_NonGovt" class="form-control" required>
+                                <option value="">--Select--</option>
+                                <option name="Type_Govt_NonGovt" value="Government">Government</option>
+                                <option name="Type_Govt_NonGovt" value="Non-Government">Non-Government</option>
+                            </select>
                         </div>
+
+                        
+                        <div class="form-group">
+                            <label> Upload the relevant document</label>
+                            <input type="file" name="pdffile1" id="pdffile1" required/><br>
+                                    <img src="" id="pdf-file1-tag" width="100px" />
+
+                                    <script type="text/javascript">
+                                        function readURL(input) {
+                                            if (input.files && input.files[0]) {
+                                                var reader = new FileReader();
+                                                
+                                                reader.onload = function (e) {
+                                                    $('#pdf-file1-tag').attr('src', e.target.result);
+                                                }
+                                                reader.readAsDataURL(input.files[0]);
+                                            }
+                                        }
+                                        $("#pdffile1").change(function(){
+                                            readURL(this);
+                                        });
+                                    </script><br>
+						</div>
+                        		
 
 
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" name="updatedata" class="btn btn-primary">Update Data</button>
+                        <button type="submit" id="insertbutton" name="insertdata" class="btn btn-primary" onClick="datechecker() ">Save Data</button>
                     </div>
                 </form>
 
             </div>
         </div>
     </div>
+
     <!-- DELETE POP UP FORM  -->
     <!-- dont make changes-->
     <div class="modal fade" id="deletemodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -340,7 +174,219 @@ foreach ($branches as $branchOption) {
             </div>
         </div>
     </div>
-  
+
+ <!-- main card -->
+ <!-- buttons and search buttoncard -->
+            <div class="card">
+                <div class="card-body">
+                <?php 
+                if($_SESSION["role"] == true) {
+                    echo "Welcome". " ".$_SESSION["role"] ;
+                } else {
+                    header("Location:index.php"); 
+                }
+                ?>
+
+            <div class="card-body mt-5">
+                <h2>Research Projects</h2>
+            </div>
+            <div class="card">
+                <div class="card-body btn-group">
+                <form action="<?php echo $_SERVER["PHP_SELF"]; ?>" method="post">
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#studentaddmodal"> 
+                        ADD DATA
+                    </button>
+            </form> &nbsp;
+
+            <form action="<?php echo $_SERVER["PHP_SELF"]; ?>" method="post">					
+				<button type="submit" onclick="exportTableToCSVuser('USerData_BookChapters.csv')" class="btn btn-success">Export to excel</button>
+			</form> &nbsp; &nbsp; 
+        
+            <form method="post">
+                <label>Search</label>
+                <input type="text" name="search">
+                <input type="submit" name="submit">
+            </form>
+            </div>
+            </div>
+
+             <!-- table -->
+            <div id="tabledataid" class="card">
+                <div class="card-body">
+                      <!-- th change -->
+                    <table id="datatableid" class="table table-bordered table-dark mt-2">
+                        <thead>
+                            <tr>
+                                <th scope="col"> ID </th>
+                                <th scope="col"> RESEARCH PROJECT / CONSULTANCY </th>
+                                <th scope="col"> NAME OF THE PROJECT/ENDOWNMENTS </th>
+                                <th scope="col"> NAME OF THE PRINCIPAL INVESTIGATOR/CO-INVESTIGATOR </th>
+                                <th scope="col"> DEPARTMENT OF PRINCIPAL INVESTIGATOR </th>
+                                <th scope="col"> YEAR OF AWARD </th>
+                                <th scope="col"> AMOUNT SANCTIONED </th>
+                                <th scope="col"> DURATION OF THE PROJECT </th>
+								<th scope="col"> NAME OF THE FUNDING AGENCY </th>
+                                <th scope="col"> FUNDING AGENCY WEBSITE LINK </th>
+                                <th scope="col"> TYPE(GOVT./NON-GOVT.) </th>
+                                <th scope="col"> UPLOAD THE RELEVANT DOCUMENT </th>
+                               
+                            </tr>
+                        </thead>
+                        
+                        <?php
+                        $user = $_SESSION["role"];
+                        
+                        $result = "SELECT * FROM branchadmins WHERE username = '$user'";
+
+                        $query = mysqli_query($connection, $result);
+                        $queryresult = mysqli_num_rows($query); 
+                            if($queryresult > 0){
+                                while($row = mysqli_fetch_assoc($query)){ 
+                                    $id = $row['id'];
+                                }  
+                            }
+
+
+                        $table_query = "SELECT * FROM researchprojectconsultancies ORDER BY id ASC";
+                        $query_run = mysqli_query($connection, $table_query);
+                        $query_result = mysqli_num_rows($query_run); 
+                        ?>
+
+                        <?php if($query_result > 0){
+                                        while($developer = mysqli_fetch_assoc($query_run)){   
+                                            ?>
+                        <tbody> <!-- change -->
+                            <tr>
+                                <td> <?php echo $developer['id']; ?> </td> 
+                                <td> <?php echo $developer['Type_Research_Project_Consultancy']; ?> </td> 
+                                <td> <?php echo $developer['Name_Of_Project_Endownment']; ?> </td> 
+                                <td> <?php echo $developer['Name_Of_Principal_Investigator_CoInvestigator']; ?> </td>
+                                <td> <?php echo $developer['Department_Of_Principal_Investigator']; ?> </td>
+                                <td> <?php echo $developer['Year_Of_Award']; ?> </td>
+                                <td> <?php echo $developer['Amount_Sanctioned']; ?> </td>
+                                <td> <?php echo $developer['Duration_Of_The_Project']; ?> </td>
+                                <td> <?php echo $developer['Name_Of_The_Funding_Agency']; ?> </td>
+                                <td> <?php echo $developer['Funding_Agency_Website_Link']; ?> </td>
+                                <td> <?php echo $developer['Type_Govt_NonGovt']; ?> </td>
+                                <td>
+                            <!--<a href="read.php?viewid=<?php echo htmlentities ($developer['id']);?>" class="view" title="View" data-toggle="tooltip"><i class="material-icons">&#xE417;</i></a>-->
+                            <a class="edit btn-success editbtn" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
+                            <a href="uploadsindex1/<?php echo $developer['pdffile1']; ?>"  class="download" title="Download" data-toggle="tooltip"><i class="fa fa-download"></i></a>
+                         <a class="delete btn-danger deletebtn" class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
+							
+                            
+                            
+                            <!-- <button class="btn"><i class="fa fa-download"></i> Download</button> -->
+                        </td>
+                                <!-- <td>
+                                    <button type="button" class="btn btn-success editbtn"> EDIT </button>
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn-danger deletebtn"> DELETE </button>
+                                </td> -->
+                            </tr>
+                        </tbody>
+                        <?php           
+                    }
+                }
+                else 
+                {
+                    echo "No Record Found";
+                }
+            ?>
+                    </table>
+            
+        </div> 
+    </div>
+
+    <!-- EDIT POP UP FORM  -->
+    <!-- this is edit data form Make changes to variables and placeholder, keep same variables -->
+    <div class="modal fade" id="editmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel"> Edit Data </h5> &nbsp;
+                    <h5 class="modal-title" id="exampleModalLabel"> (Please enter the dates again)</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <form action="updatecode.php" method="POST">
+
+                    <div class="modal-body">
+
+                        <input type="hidden" name="update_id" id="update_id">
+
+                        <div class="form-group">
+                            <label>Select Research Project/Consultancy</label>
+                            <select name="Type_Research_Project_Consultancy" class="form-control" required>
+                                <option value="">--Select Type of Research--</option>
+                                <option name="Type_Research_Project_Consultancy" value="Research Project">Research Project</option>
+                                <option name="Type_Research_Project_Consultancy" value="Research Consultancy">Research Consultancy</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label> Name of the Project/Endownments </label>
+                            <input type="text" name="Name_Of_The_Project_Endownment" class="form-control" placeholder="Name of the Project/Endownment" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label> Name of the Principal Investigator/Co-investigator </label>
+                            <input type="text" name="Name_Of_The_Principal_Investigator_CoInvestigator" class="form-control" placeholder="Name of the Principal Investigator/Co-Investigator" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label> Department of Principal Investigator </label>
+                            <input type="text" name="Department_Of_Principal_Investigator" class="form-control" placeholder="Department of Principal Investigator">
+                        </div>
+
+                        <div class="form-group">
+                            <label> Year of Award</label>
+                            <input type="text" name="Year_Of_Award" class="form-control" placeholder="Year of Award" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label> Amount Sanctioned</label>
+                            <input type="text" name="Amount_Sanctioned" class="form-control" placeholder="Amount Sanctioned" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Duration of the project</label>
+                            <input type="text" name="Duration_Of_The_Project" class="form-control" placeholder="Duration of project" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Name of the Funding Agency</label>
+                            <input type="text" name="Name_Of_The_Funding_Agency" class="form-control" placeholder="Enter Name of Agency" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Funding agency website link</label>
+                            <input type="text" name="Funding_Agency_Website_Link" class="form-control" placeholder="Enter Link" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Select Govt./Non-Govt.</label>
+                            <select name="Type_Govt_NonGovt" class="form-control" required>
+                                <option value="">--Select Type of Publication--</option>
+                                <option name="Type_Govt_NonGovt" value="Government">Government</option>
+                                <option name="Type_Govt_NonGovt" value="Non-Government">Non-Government</option>
+                            </select>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" name="updatedata" class="btn btn-primary">Update Data</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
 
 <!--Search data -->
 <div id="srch" class="card-body">
@@ -349,8 +395,7 @@ foreach ($branches as $branchOption) {
                     <thead>
                         <tr>
                         <th> ID </th>
-                        <th>Academic Year (July 1st -June 30th )</th>
-                        <th> NATURE </th>
+                        <th> RESEARCH PROJECT / CONSULTANCY </th>
                         <th> NAME OF THE PROJECT/ENDOWNMENTS </th>
                         <th> NAME OF THE PRINCIPAL INVESTIGATOR/CO-INVESTIGATOR </th>
                         <th> DEPARTMENT OF PRINCIPAL INVESTIGATOR </th>
@@ -361,21 +406,21 @@ foreach ($branches as $branchOption) {
                         <th> FUNDING AGENCY WEBSITE LINK </th>
                         <th> TYPE(GOVT./NON-GOVT.) </th>
                         <th> UPLOAD THE RELEVANT DOCUMENT </th>
-                        <th> STATUS </th>
                         </tr>
                     <thead>       
 <?php 
     if (isset($_POST["submit"])) {
         $str = mysqli_real_escape_string($connection, $_POST["search"]);
 
-        $sth = "SELECT * FROM `researchprojectconsultancies` WHERE branch='$branch' AND (Academic_Year LIKE '%$str%' OR id LIKE '%$str%' OR Type_Research_Project_Consultancy LIKE '%$str%' OR Name_Of_Project_Endownment LIKE '%$str%' OR Name_Of_Principal_Investigator_CoInvestigator LIKE '%$str%' OR Department_Of_Principal_Investigator LIKE '%$str%' OR Year_Of_Award LIKE '%$str%' OR Amount_Sanctioned LIKE '%$str%' OR Duration_Of_The_Project LIKE '%$str%' OR Name_Of_The_Funding_Agency LIKE '%$str%' OR Funding_Agency_Website_Link LIKE '%$str%' OR Type_Govt_NonGovt LIKE '%$str%' OR STATUS LIKE '%$str%')";
+        $sth = "SELECT * FROM `researchprojectconsultancies` WHERE (id LIKE '%$str%' OR Type_Research_Project_Consultancy LIKE '%$str%' OR Name_Of_Project_Endownment LIKE '%$str%' OR Name_Of_Principal_Investigator_CoInvestigator LIKE '%$str%' OR Department_Of_Principal_Investigator LIKE '%$str%' OR Year_Of_Award LIKE '%$str%' OR Amount_Sanctioned LIKE '%$str%' OR Duration_Of_The_Project LIKE '%$str%' OR Name_Of_The_Funding_Agency LIKE '%$str%' OR Funding_Agency_Website_Link LIKE '%$str%' OR Type_Govt_NonGovt LIKE '%$str%')";
+        
         $result = mysqli_query($connection, $sth);
         $queryresult = mysqli_num_rows($result); ?>
 
                     <div class="card">
                         <div class="card-body btn-group">
                         <div> Results- </div> &nbsp; &nbsp;
-                        <button class="btn btn-success" onclick="exportTableToCSV('Search_Data.csv')"> Export Data </button>
+                        <button class="btn btn-success" onclick="exportTableToCSV('Search_data.csv')"> Export Data </button>
                         </div>
                     </div>
                     
@@ -386,7 +431,6 @@ foreach ($branches as $branchOption) {
              
                     <tr>                
                         <td> <?php echo $row['id']; ?> </td>
-                        <td> <?php echo $row['Academic_year']; ?> </td> 
                         <td> <?php echo $row['Type_Research_Project_Consultancy']; ?> </td> 
                         <td> <?php echo $row['Name_Of_Project_Endownment']; ?> </td> 
                         <td> <?php echo $row['Name_Of_Principal_Investigator_CoInvestigator']; ?> </td>
@@ -395,39 +439,18 @@ foreach ($branches as $branchOption) {
                         <td> <?php echo $row['Amount_Sanctioned']; ?> </td>
                         <td> <?php echo $row['Duration_Of_The_Project']; ?> </td>
                         <td> <?php echo $row['Name_Of_The_Funding_Agency']; ?> </td>
-                        <td><a href="<?php echo $row['Funding_Agency_Website_Link']; ?>" target="_blank"><?php echo $row['Funding_Agency_Website_Link']; ?></a></td>
+                        <td> <?php echo $row['Funding_Agency_Website_Link']; ?> </td>
                         <td> <?php echo $row['Type_Govt_NonGovt']; ?> </td>
                         <td>
-
-                            <a href="../../fdpadmins/researchprojects-consultancies/uploadsindex1/<?php echo $row['pdffile1']; ?>"  class="download" title="Download" data-toggle="tooltip"><i class="fa fa-download"></i></a>
-                             <a class="edit btn-success editbtn" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
-                        <a class="delete btn-danger deletebtn" class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
-                           
+                            <!--<a href="read.php?viewid=<?php echo htmlentities ($row['id']);?>" class="view" title="View" data-toggle="tooltip"><i class="material-icons">&#xE417;</i></a>-->
+                            <a class="edit btn-success editbtn" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
+                            <a href="uploadsindex1/<?php echo $row['pdffile1']; ?>"  class="download" title="Download" data-toggle="tooltip"><i class="fa fa-download"></i></a>
+                           <a class="delete btn-danger deletebtn" class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
 							
                             
                             
                             <!-- <button class="btn"><i class="fa fa-download"></i> Download</button> -->
                         </td>
-                        <td>
-                                <?php if ($row['STATUS'] == 'PENDING') { ?>
-                                    <form method="POST" action="approved.php">
-                                        <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
-                                        <input type="submit" name="approve" value="Approve">
-                                    </form>
-                                    <form method="post" action="reject.php">
-                                        <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
-                                        <button type="submit" name="reject" class="btn btn-danger"> Send Back</button>
-                                    </form>
-                                <?php } elseif ($row['STATUS'] == 'Sent Back') { ?>
-                                    <?php echo $row['STATUS']; ?>
-                                    <form method="POST" action="approve-now.php">
-                                        <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
-                                        <input type="submit" name="approve_now" value="Approve Now">
-                                    </form>
-                                <?php } else { ?>
-                                    <?php echo $row['STATUS']; ?>
-                                <?php } ?>
-                            </td>
                     </tr> 
                     <tbody>
                     <?php 
@@ -498,17 +521,17 @@ foreach ($branches as $branchOption) {
                 console.log(data);
                 //chnage this keep same variable as above
                 $('#update_id').val(data[0]);
-                $('#Academic_year').val(data[1]);
-                $('#Type_Research_Project_Consultancy').val(data[2]);
-                $('#Name_Of_Project_Endownment').val(data[3]);
-                $('#Name_Of_Principal_Investigator_CoInvestigator').val(data[4]);
-                $('#Department_Of_Principal_Investigator').val(data[5]);
-                $('#Year_Of_Award').val(data[6]);
-                $('#Amount_Sanctioned').val(data[7]);
-                $('#Duration_Of_The_Project').val(data[8]);
-                $('#Name_Of_The_Funding_Agency').val(data[9]);
-                $('#Funding_Agency_Website_Link').val(data[10]);
-                $('#Type_Govt_NonGovt').val(data[11]);
+                $('#Type_Research_Project_Consultancy').val(data[1]);
+                $('#Name_Of_Project_Endownment').val(data[2]);
+                $('#Name_Of_Principal_Investigator_CoInvestigator').val(data[3]);
+                $('#Department_Of_Principal_Investigator').val(data[4]);
+                $('#Year_Of_Award').val(data[5]);
+                $('#Amount_Sanctioned').val(data[6]);
+                $('#Duration_Of_The_Project').val(data[7]);
+                $('#Name_Of_The_Funding_Agency').val(data[8]);
+                $('#Funding_Agency_Website_Link').val(data[9]);
+                $('#Type_Govt_NonGovt').val(data[10]);
+                $('#pdffile1').val(data[11]);
                 
             });
         });
@@ -547,20 +570,12 @@ foreach ($branches as $branchOption) {
     var rows = x.querySelectorAll("table tr");  
 
     //merge the whole data in tabular form   
-    for (var i = 0; i < rows.length; i++) {  
-    var row = [];
-    var cols = rows[i].querySelectorAll("td, th");  
-    for (var j = 1; j < cols.length - 2; j++) {
-        // Check if the cell value contains a comma, if so, wrap it in double quotes
-        var cellValue = cols[j].innerText;
-        if (cellValue.includes(',')) {
-            row.push('"' + cellValue + '"');
-        } else {
-            row.push(cellValue);
-        }
-    }
-    csv.push(row.join(","));
-} 
+    for(var i=0; i<rows.length; i++) {  
+        var row = [], cols = rows[i].querySelectorAll("td, th");  
+        for( var j=1; j<cols.length-1; j++)  
+        row.push(cols[j].innerText);  
+        csv.push(row.join(","));  
+    }   
     //call the function to download the CSV file  
     downloadCSVuser(csv.join("\n"), filename);  
     }  
@@ -591,24 +606,17 @@ foreach ($branches as $branchOption) {
     var rows = x.querySelectorAll("table tr");  
 
     //merge the whole data in tabular form   
-    for (var i = 0; i < rows.length; i++) {  
-    var row = [];
-    var cols = rows[i].querySelectorAll("td, th");  
-    for (var j = 1; j < cols.length - 2; j++) {
-        // Check if the cell value contains a comma, if so, wrap it in double quotes
-        var cellValue = cols[j].innerText;
-        if (cellValue.includes(',')) {
-            row.push('"' + cellValue + '"');
-        } else {
-            row.push(cellValue);
-        }
-    }
-    csv.push(row.join(","));
-}  
+    for(var i=0; i<rows.length; i++) {  
+        var row = [], cols = rows[i].querySelectorAll("td, th");  
+        for( var j=1; j<cols.length-1; j++)  
+        row.push(cols[j].innerText);  
+        csv.push(row.join(","));  
+    }   
     //call the function to download the CSV file  
     downloadCSV(csv.join("\n"), filename);  
     }  
 </script> 
+
 
 </body>
 </html>

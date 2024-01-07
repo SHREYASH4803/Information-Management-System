@@ -11,7 +11,11 @@ session_start();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title> Workshop/Seminar </title>
+<<<<<<< HEAD:ecell/researchconsultancies/index.php
+    <title> Research Consultancies </title>
+=======
+    <title> WORKSHOP/SEMINARS</title>
+>>>>>>> 413f2f4fe76c24d8e6f188c3f41c0ce052c02da4:ecell/workshop/index.php
 
     <link rel="stylesheet" href="styles.css">
     
@@ -32,8 +36,8 @@ session_start();
 
     <?php include('../../header.php'); ?>
 
-    <!-- Modal --->
-    <!--- this is add data form Make changes to variables, keep same variables -->
+    <!-- Modal -->
+    <!-- this is add data form Make changes to variables, keep same variables -->
     <div class="modal fade mt-2" id="studentaddmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -48,87 +52,93 @@ session_start();
                 <form action="insertcode.php" method="POST" enctype="multipart/form-data" >
 
                     <div class="modal-body">
-                        
 
-                        <div class="form-group">
-                            <label>Academic Year*</label>
-                            <select name="year" class="form-control" required>
+                        <!-- <div class="form-group">
+                            <label>Year</label>
+                            <select name="Year_Of_Publication" class="form-control" required>
                                 <option value="">--Select Year--</option>
-                                <option name="year" value="2019-20">2019-20</option>
-                                <option name="year" value="2020-21">2020-21</option>
-                                <option name="year" value="2021-22">2021-22</option>
-                                <option name="year" value="2022-23">2022-23</option>
-                                <option name="year" value="2023-24">2023-24</option>
-                                <option name="year" value="2024-25">2024-25</option>
+                                <option name="Year_Of_Publication" value="2017-18">2017-18</option>
+                                <option name="Year_Of_Publication" value="2018-19">2018-19</option>
+                                <option name="Year_Of_Publication" value="2019-20">2019-20</option>
+                                <option name="Year_Of_Publication" value="2020-21">2020-21</option>
+                                <option name="Year_Of_Publication" value="2021-22">2021-22</option>
+                                <option name="Year_Of_Publication" value="2021-22">2022-23</option>
                             </select>
                         </div>
 
                         <div class="form-group">
-                            <label>Branch*</label>
-                            <select name="branch" class="form-control" required>
-                                <option value="">--Select branch--</option>
-                                <option name="branch" value="IT">IT</option>
-                                <option name="branch" value="Computer">Computer</option>
-                                <option name="branch" value="Extc">Extc</option>
-                                <option name="branch" value="Electrical">Electrical</option>
-                                <option name="branch" value="Mechanical">Mechanical</option>
-                                <option name="branch" value="Humanities">Humanities</option>
+                            <label>Branch</label>
+                            <select name="Branch" class="form-control" required>
+                                <option value="">--Select Department--</option>
+                                <option name="Branch" value="IT">IT</option>
+                                <option name="Branch" value="EXTC">EXTC</option>
+                                <option name="Branch" value="Mechanical">Mechanical</option>
+                                <option name="Branch" value="Computers">Computers</option>
+                                <option name="Branch" value="Electrical">Electrical</option>
+                                <option name="Branch" value="Humanities">Humanities</option>
+                            </select>
+                        </div> -->
+
+                        <div class="form-group">
+                            <label> Year </label>
+                            <input type="text" name="year" class="form-control" placeholder="Year in which workshop conducted" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label> Type of Activity </label>
+                            <select name="workshop_or_seminar" class="form-control" required>
+                                <option value="">--Select Type of Activity--</option>
+                                <option name="workshop_or_seminar" value="workshop">Workshop</option>
+                                <option name="workshop_or_seminar" value="seminar">Seminar</option>
                             </select>
                         </div>
 
                         <div class="form-group">
-                            <label>Workshop/Seminar*</label>
-                            <select name="workshop_seminar" class="form-control" required>
-                                <option value="">--Select--</option>
-                                <option name="workshop_seminar" value="Workshop">Workshop</option>
-                                <option name="workshop_seminar" value="Seminar">Seminar</option>
+                            <label> Department </label>
+                            <select name="department" class="form-control" required>
+                                <option value="">--Select Department--</option>
+                                <option name="Branch" value="IT">IT</option>
+                                <option name="Branch" value="EXTC">EXTC</option>
+                                <option name="Branch" value="Mechanical">Mechanical</option>
+                                <option name="Branch" value="Computers">Computers</option>
+                                <option name="Branch" value="Electrical">Electrical</option>
+                                <option name="Branch" value="Humanities">Humanities</option>
                             </select>
-                        </div>
-                        
+                        </div> 
+
                         <div class="form-group">
-                            <label> Name of the Coordinator*</label>
-                            <input type="text" name="coordinator" class="form-control" placeholder="Name of the Coordinator" required>
+                            <label> Co-ordinator </label>
+                            <input type="text" name="Name_of_coordinator" class="form-control" placeholder="Enter Name of Coordinator" required>
                         </div>
 
                         <div class="form-group">
-                            <label> Title of the workshop/seminar* </label>
-                            <input type="text" name="title" class="form-control" placeholder="Enter Title of Chapter" required>
+                            <label> Title of the Activity </label>
+                            <input type="text" name="Name_of_activity" class="form-control" placeholder="Enter Name of Activity" required>
                         </div>
 
                         <div class="form-group">
-                            <label>Category of the activity*</label>
+                            <label>Select Category of the activity </label>
                             <select name="category" class="form-control" required>
-                                <option value="">--Select Type of activity-</option>
-                                <option name="category" value="Research Methodology">Research Methodology</option>
-                                <option name="category" value="IPR">IPR</option>
-                                <option name="category" value="Entrepreneurship">Entrepreneurship</option>
-                                <option name="category" value="Soft skills">Soft skills</option>
-                                <option name="category" value="Others">Others</option>
+                                <option value="">--Select Category of Activity--</option>
+                                <option name="Category" value="Research_methodology"> Research methodology </option>
+                                <option name="Category" value="Intellectual_Property_Rights">Intellectual Property Rights (IPR)</option>
+                                <option name="Category" value="Entreprenuership">Entreprenuership</option>
+                                <option name="Category" value="Soft_skills">Soft skills</option>
+                                <option name="Category" value="Language_and_communication_skills">Language and Communication Skills</option>
+                                <option name="Category" value="Life_skills">Life Skills (Yoga, physical fitness, health and hygiene)</option>
+                                <option name="Category" value="ICT">ICT</option>
+                                <option name="Category" value="computing_skills">Computing Skills</option>
+                                <option name="Category" value="Promotion_of_gender_equity">Proportion of Gender Equity</option>
+                                <option name="Category" value="Value_education">Value Education</option>
+                                <option name="Category" value="Ethics">Ethics</option>
+                                <option name="Category" value="Environmental_consciousness_activity">Environmental Consciousness Activity</option>
+                                <option name="Category" value="others">Others</option>
                             </select>
                         </div>
 
                         <div class="form-group">
-                            <label> If others_mention the Theme/Category</label>
-                            <input type="text" name="others" class="form-control" placeholder="Enter category">
-                        </div>
-
-                        <div class="form-group">
-                            <label> Number of Participants* </label>
-                            <input type="number" name="no_of_participants" class="form-control" placeholder="Enter number of participants" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label> Starting date* </label>
-                            <input type="date" name="start_date" class="form-control" placeholder="Starting date" max="<?php echo date('Y-m-d'); ?>"required>
-                        </div>
-                        <div class="form-group">
-                            <label> Ending date* </label>
-                            <input type="date" name="end_date" class="form-control" placeholder="Ending date" max="<?php echo date('Y-m-d'); ?>" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label> Upload Activity report in the appropraite template* </label>
-                            <input type="file" name="pdffile1" id="pdffile1" accept="application/pdf" required/><br>
+                            <label> Upload activity report in the appropriate template </label>
+                            <input type="file" name="pdffile1" id="pdffile1" required/><br>
                                     <img src="" id="pdf-file1-tag" width="100px" />
 
                                     <script type="text/javascript">
@@ -147,6 +157,29 @@ session_start();
                                         });
                                     </script><br>
 						</div>
+                        <div class="form-group">
+                            <label> Submit front page of book </label>						
+						    <input type="file" name="pdffile2" id="pdffile2" required/><br>
+                                    <img src="" id="pdf-file2-tag" width="100px" />
+
+                                    <script type="text/javascript">
+                                        function readURL(input) {
+                                            if (input.files && input.files[0]) {
+                                                var reader = new FileReader();
+                                                
+                                                reader.onload = function (e) {
+                                                    $('#pdf-file2-tag').attr('src', e.target.result);
+                                                }
+                                                reader.readAsDataURL(input.files[0]);
+                                            }
+                                        }
+                                        $("#pdffile2").change(function(){
+                                            readURL(this);
+                                        });
+                                    </script><br>
+						</div>			
+
+
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -202,16 +235,8 @@ session_start();
                 ?>
 
             <div class="card-body mt-5">
-                <h2> WORKSHOPS/SEMINARS</h2>
+                <h2>WORKSHOPS/ SEMINARS CONDUCTED</h2>
             </div>
-            
-            <?php 
-if ($_SESSION["role"] == true) {
-    echo '<div style="position: absolute; top: 100px; right: 70px; font-weight: bold; color: #007bff;">Welcome ' . $_SESSION["role"] . '<br><span style="color: #008000;">You logged in Ecell-Club</span></div>';
-} else {
-    header("Location: index.php"); 
-}
-?>
             <div class="card">
                 <div class="card-body btn-group">
                 <form action="<?php echo $_SERVER["PHP_SELF"]; ?>" method="post">
@@ -230,7 +255,8 @@ if ($_SESSION["role"] == true) {
                 <input type="submit" name="submit">
             </form>
             </div>
-            </div> 
+            </div>
+
              <!-- table -->
             <div id="tabledataid" class="card">
                 <div class="card-body">
@@ -238,19 +264,19 @@ if ($_SESSION["role"] == true) {
                     <table id="datatableid" class="table table-bordered table-dark mt-2">
                         <thead>
                             <tr>
-                                <th scope="col"> ID</th>
-                                <th scope="col"> Year </th>
-                                <th scope="col"> Branch </th>
-                                <th scope="col"> Workshop/ seminar</th>
-                                <th scope="col"> Coordinator </th>
-                                <th scope="col"> Title of the workshop / seminar </th>
-                                <th scope="col"> Category of the activity</th>
-								<th scope="col"> If others_mention the Theme/category</th>
-                                <th scope="col"> Number of Participants</th>
-                                <th scope="col"> Starting Date</th>
-                                <th scope="col"> Ending Date</th>
-                                <th scope="col"> Action</th>
-                                <th scope="col"> STATUS</th>
+                                <th scope="col"> S.NO </th>
+                                <th scope="col"> NAME OF THE CLUB</th>
+                                <th scope="col"> YEAR </th>
+                                <th scope="col"> WORKSHOP / SEMINAR </th>
+                                <th scope="col"> DEPARTMENT</th>
+                                <th scope="col"> CO-ORDINATOR </th>
+                                <th scope="col"> TITLE OF THE WORKSHOP/SEMINAR </th>
+								<th scope="col"> CATEGORY OF THE ACTIVITY </th>
+                                <th scope="col"> IF OTHERS, PLEASE MENTION THE CATEGORY</th>
+                                <th scope="col"> NUMBER OF PARTICIPANTS </th>
+                                <th scope="col"> STARTING DATE </th>
+                                <th scope="col"> ENDING DATE </th>
+                                <th scope="col"> UPLOAD ACTIVITY REPORT</th>
                                
                             </tr>
                         </thead>
@@ -264,67 +290,54 @@ if ($_SESSION["role"] == true) {
                         $queryresult = mysqli_num_rows($query); 
                             if($queryresult > 0){
                                 while($row = mysqli_fetch_assoc($query)){ 
-                                    $id = $row['id'];
-                                    
+                                    $s_no = $row['id'];
                                 }  
                             }
 
-                        $table_query = "SELECT * FROM workshops WHERE Source ='ecell' ORDER BY id ASC";
+                        $table_query = "SELECT * FROM ecell WHERE user_id=$s_no";
                         
                         $query_run = mysqli_query($connection, $table_query);
                         $query_result = mysqli_num_rows($query_run); ?>
+
                         <?php if($query_result > 0){
                                         while($developer = mysqli_fetch_assoc($query_run)){   
                                             ?>
                         <tbody> <!-- change -->
                             <tr>
-                            <?php
-                $status = $developer['STATUS'];
-                $is_disabled = ($status == "approved") ? "disabled" : "";
-                // If STATUS is "approved", set the $is_disabled variable to "disabled"
-                ?>
-                                <td> <?php echo $developer['id']; ?> </td>
-                                <td> <?php echo $developer['year']; ?> </td> 
-                                <td> <?php echo $developer['branch']; ?> </td> 
-                                <td> <?php echo $developer['workshop_seminar']; ?> </td>
+                                <td> <?php echo $developer['s_no']; ?> </td>
+                                <td> <?php echo $developer['club']; ?> </td> 
+                                <td> <?php echo $developer['year']; ?> </td>
+                                <td> <?php echo $developer['workshop/seminar']; ?> </td>
+                                <td> <?php echo $developer['dept']; ?> </td>
                                 <td> <?php echo $developer['coordinator']; ?> </td>
                                 <td> <?php echo $developer['title']; ?> </td>
                                 <td> <?php echo $developer['category']; ?> </td>
                                 <td> <?php echo $developer['others']; ?> </td>
-                                <td> <?php echo $developer['no_of_participants']; ?> </td>
                                 <td> <?php echo $developer['start_date']; ?> </td>
                                 <td> <?php echo $developer['end_date']; ?> </td>
                                 <td>
-                                <a href="../../fdpadmins/workshop/uploads/<?php echo $developer['pdffile1']; ?>"  class="download" title="Download" data-toggle="tooltip"><i class="fa fa-download"></i></a>
-							<!-- <a href="uploadsfrontit/<?php echo $developer['pdffile2']; ?>"  class="download" title="Download" data-toggle="tooltip"><i class="fa fa-download"></i></a> -->
-<!--                             <a class="delete btn-danger deletebtn" class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
- -->							
- <?php if ($status == "approved") { ?>
-    <!-- Code for when the status is approved -->
-    <!-- You can hide the delete and edit buttons for the approved status -->
-<?php } elseif ($status == "Sent Back") { ?>
-    <!-- Code for when the status is sent back -->
-    <a class="edit btn-success editbtn" title="Edit" data-toggle="tooltip" <?php echo $is_disabled ?>>
-        <i class="material-icons">&#xE254;</i>
-    </a>
-<?php } else { ?>
-    <!-- Code for when the status is pending or any other status -->
-    <a class="edit btn-success editbtn" title="Edit" data-toggle="tooltip" <?php echo $is_disabled ?>>
-        <i class="material-icons">&#xE254;</i>
-    </a>
-    <a class="delete btn-danger deletebtn" title="Delete" data-toggle="tooltip" <?php echo $is_disabled ?>>
-        <i class="material-icons">&#xE872;</i>
-    </a>
-<?php } ?>
-                </td>
-
-                <td> <?php echo $status; ?> </td>
-            </tr>
-        </tbody>
-        <?php           
-    }
-}
-else 
+                            <!--<a href="read.php?viewid=<?php echo htmlentities ($developer['id']);?>" class="view" title="View" data-toggle="tooltip"><i class="material-icons">&#xE417;</i></a>-->
+                            <a class="edit btn-success editbtn" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
+                            <a href="uploadsindexit/<?php echo $developer['pdffile1']; ?>"  class="download" title="Download" data-toggle="tooltip"><i class="fa fa-download"></i></a>
+							<a href="uploadsfrontit/<?php echo $developer['pdffile2']; ?>"  class="download" title="Download" data-toggle="tooltip"><i class="fa fa-download"></i></a>
+                            <a class="delete btn-danger deletebtn" class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
+							
+                            
+                            
+                            <!-- <button class="btn"><i class="fa fa-download"></i> Download</button> -->
+                        </td>
+                                <!-- <td>
+                                    <button type="button" class="btn btn-success editbtn"> EDIT </button>
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn-danger deletebtn"> DELETE </button>
+                                </td> -->
+                            </tr>
+                        </tbody>
+                        <?php           
+                    }
+                }
+                else 
                 {
                     echo "No Record Found";
                 }
@@ -334,11 +347,10 @@ else
         </div> 
     </div>
 
-    
-
     <!-- EDIT POP UP FORM  -->
     <!-- this is edit data form Make changes to variables and placeholder, keep same variables -->
-    <div class="modal fade" id="editmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="editmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -356,105 +368,58 @@ else
                         <input type="hidden" name="update_id" id="update_id">
 
                         <div class="form-group">
-                            <label>Academic Year*</label>
-                            <select name="year" class="form-control" required>
-                                <option value="">--Select Year--</option>
-                                <option name="year" value="2019-20">2019-20</option>
-                                <option name="year" value="2020-21">2020-21</option>
-                                <option name="year" value="2021-22">2021-22</option>
-                                <option name="year" value="2022-23">2022-23</option>
-                                <option name="year" value="2023-24">2023-24</option>
-                                <option name="year" value="2024-25">2024-25</option>
+                            <label> Academic Year </label>
+                            <input type="text"  id="Year_Of_Publication" name="Year_Of_Publication" class="form-control" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label> Department/Branch Name </label>
+                            <input type="text"  id="Branch" name="Branch" value="$branch" class="form-control" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label> Title of the Book Published </label>
+                            <input type="text"  id="Title_Of_The_Book_Published" name="Title_Of_The_Book_Published" class="form-control" placeholder="Enter Title" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label> Name of the Teacher </label>
+                            <input type="text" name="Name_Of_The_Teacher" id="Name_Of_The_Teacher" class="form-control" placeholder="Name of the teacher" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label> Enter title of chapter published in book </label>
+                            <input type="text" name="Title_Of_The_Chapter_Published_In_The_Book"  id="Title_Of_The_Chapter_Published_In_The_Book" class="form-control" placeholder="Enter Title of Chapter">
+                        </div>
+
+                        <div class="form-group">
+                            <label> Name of publisher </label>
+                            <input type="text" name="Name_Of_The_Publisher" id="Name_Of_The_Publisher" class="form-control" placeholder="Enter Name of Publisher" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Select National/International</label>
+                            <select id="National_or_International" name="National_Or_International" class="form-control" required>
+                                <option id="National_or_International" name="National_Or_International" value="National">National</option>
+                                <option id="National_or_International" name="National_Or_International" value="International">International</option>
                             </select>
                         </div>
 
                         <div class="form-group">
-                            <label>Branch*</label>
-                            <select name="branch" id="branch" class="form-control" required>
-                                <option value="">--Select branch--</option>
-                                <option name="branch" value="IT">IT</option>
-                                <option name="branch" value="Computer">Computer</option>
-                                <option name="branch" value="Extc">Extc</option>
-                                <option name="branch" value="Electrical">Electrical</option>
-                                <option name="branch" value="Mechanical">Mechanical</option>
-                                <option name="branch" value="Humanities">Humanities</option>
-                            </select>
-                        </div>
-
-                       <div class="form-group">
-                            <label>Workshop/Seminar*</label>
-                            <select name="workshop_seminar" id="workshop_seminar" class="form-control" required>
-                                <option value="">--Select--</option>
-                                <option name="workshop_seminar" value="Workshop">Workshop</option>
-                                <option name="workshop_seminar" value="Seminar">Seminar</option>
-                            </select>
+                            <label> Enter ISBN/ISSN number </label>
+                            <input type="text" name="ISBN_Or_ISSN_Number" id="ISBN_Or_ISSN_Number" class="form-control" placeholder="Enter ISBN/ISSN number" required >
                         </div>
 
                         <div class="form-group">
-                            <label> Name of the Coordinator*</label>
-                            <input type="text" name="coordinator" id="coordinator" class="form-control" placeholder="Name of the Coordinator" required>
+                            <label> Enter Volume Issue </label>
+                            <input type="text" name="Volume_Issue" id="Volume_Issue" class="form-control" placeholder="Enter Volume" required>
                         </div>
+                        
+						
 
-                        <div class="form-group">
-                            <label> Title of the workshop/seminar* </label>
-                            <input type="text" name="title" id="title" class="form-control" placeholder="Enter Title of Chapter" required>
-                        </div>
+                            
 
-                        <div class="form-group">
-                            <label>Category of the activity*</label>
-                            <select name="category" id="category" class="form-control" required>
-                                <option value="">--Select Type of activity-</option>
-                                <option name="category" value="Research Methodology">Research Methodology</option>
-                                <option name="category" value="IPR">IPR</option>
-                                <option name="category" value="Entrepreneurship">Entrepreneurship</option>
-                                <option name="category" value="Soft skills">Soft skills</option>
-                                <option name="category" value="Others">Others</option>
-                            </select>
-                        </div>
-
-                        <div class="form-group">
-                            <label> If others_mention the Theme/Category</label>
-                            <input type="text" name="others" id="others" class="form-control" placeholder="Enter category">
-                        </div>
-
-                        <div class="form-group">
-                            <label> Number of Participants* </label>
-                            <input type="number" name="no_of_participants" id="no_of_participants" class="form-control" placeholder="Enter number of participants" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label> Starting date* </label>
-                            <input type="date" name="start_date" id="start_date" class="form-control" placeholder="Starting date" max="<?php echo date('Y-m-d'); ?>"required>
-                        </div>
-
-                        <div class="form-group">
-                            <label> Ending date* </label>
-                            <input type="date" name="end_date" id="end_date" class="form-control" placeholder="Ending date" max="<?php echo date('Y-m-d'); ?>" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label> Upload Activity report in the appropraite template* </label>
-                            <input type="file" name="pdffile1" id="pdffile1" accept="application/pdf" required/><br>
-                                    <img src="" id="pdf-file1-tag" width="100px" />
-
-                                    <script type="text/javascript">
-                                        function readURL(input) {
-                                            if (input.files && input.files[0]) {
-                                                var reader = new FileReader();
-                                                
-                                                reader.onload = function (e) {
-                                                    $('#pdf-file1-tag').attr('src', e.target.result);
-                                                }
-                                                reader.readAsDataURL(input.files[0]);
-                                            }
-                                        }
-                                        $("#pdffile1").change(function(){
-                                            readURL(this);
-                                        });
-                                    </script><br>
-						</div>
                     </div>
-                    <!-- </div> -->
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                         <button type="submit" name="updatedata" class="btn btn-primary">Update Data</button>
@@ -471,26 +436,24 @@ else
                     <table class="table table-bordered ">
                     <thead>
                         <tr>
-                                <th> ID</th>
-                                <th> Year </th>
-                                <th> Branch </th>
-                                <th> Workshop/ seminar</th>
-                                <th> Coordinator </th>
-                                <th> Title of the workshop / seminar </th>
-                                <th> Category of the activity</th>
-								<th> If others_mention the Theme/category</th>
-                                <th> Number of Participants</th>
-                                <th> Starting Date</th>
-                                <th> Ending Date</th>
-                                <th> Action</th>
-                                <th> STATUS</th>
+                            <th> ID </th> 
+                            <th> NAME OF TEACHER </th>
+                            <th> BRANCH </th>
+                            <th> TITLE OF BOOK </th>
+                            <th> TITLE OF CHAPTER </th>
+                            <th> NAME OF PUBLISHER </th>
+                            <th> NATIONAL </th>
+                            <th> ISBN/ISSN </th>
+                            <th> PUBLICATION YEAR </th>
+                            <th> VOLUME ISSUE </th>
+                            <th> ACTION </th>
                         </tr>
                     <thead>       
 <?php 
     if (isset($_POST["submit"])) {
         $str = mysqli_real_escape_string($connection, $_POST["search"]);
 
-        $sth = "SELECT * FROM `workshops` WHERE Source ='ecell' AND (branch LIKE '%$str%' OR workshop_seminar LIKE '%$str%' OR year LIKE '%$str%'  OR coordinator LIKE '%$str%' OR title LIKE '%$str%' OR category LIKE '$str' OR others LIKE '%$str%' OR no_of_participants LIKE '%$str%' OR start_date LIKE '%$str%' OR end_date LIKE '%$str%' OR STATUS LIKE '$str') ";
+        $sth = "SELECT * FROM `bookschapter` WHERE user_id=$id AND (Branch LIKE '%$str%' OR Name_Of_The_Teacher LIKE '%$str%' OR Title_Of_The_Book_Published LIKE '%$str%' OR Title_Of_The_Chapter_Published_In_The_Book LIKE '%$str%' OR Name_Of_The_Publisher LIKE '%$str%' OR National_Or_International LIKE '$str' OR ISBN_Or_ISSN_Number LIKE '%$str%' OR Year_Of_Publication LIKE '%$str%' OR Volume_Issue LIKE '%$str%') ";
         
         $result = mysqli_query($connection, $sth);
         $queryresult = mysqli_num_rows($result); ?>
@@ -505,43 +468,30 @@ else
                     <?php if($queryresult > 0){
                 while($row = mysqli_fetch_assoc($result)){   
                     ?>
-                    <tbody> <!-- change -->
-                            <tr>
-                            <?php
-                $status = $row['STATUS'];
-                $is_disabled = ($status == "approved") ? "disabled" : "";
-                // If STATUS is "approved", set the $is_disabled variable to "disabled"
-                ?> 
-                                <td> <?php echo $row['id']; ?> </td>
-                                <td> <?php echo $row['year']; ?> </td> 
-                                <td> <?php echo $row['branch']; ?> </td> 
-                                <td> <?php echo $row['workshop_seminar']; ?> </td>
-                                <td> <?php echo $row['coordinator']; ?> </td>
-                                <td> <?php echo $row['title']; ?> </td>
-                                <td> <?php echo $row['category']; ?> </td>
-                                <td> <?php echo $row['others']; ?> </td>
-                                <td> <?php echo $row['no_of_participants']; ?> </td>
-                                <td> <?php echo $row['start_date']; ?> </td>
-                                <td> <?php echo $row['end_date']; ?> </td>
-                                <td>
-<!--                             <a href="read.php?viewid=<?php echo htmlentities ($row['id']);?>" class="view" title="View" data-toggle="tooltip"><i class="material-icons">&#xE417;</i></a>-->                      
-<a href="../../fdpadmins/workshop/uploads/<?php echo $row['pdffile1']; ?>"  class="download" title="Download" data-toggle="tooltip"><i class="fa fa-download"></i></a>
-							<!-- <a href="uploadsfrontit/<?php echo $developer['pdffile2']; ?>"  class="download" title="Download" data-toggle="tooltip"><i class="fa fa-download"></i></a> -->
-<!--                             <a class="delete btn-danger deletebtn" class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
- -->							
+                    <tbody id="srch"> 
+             
+                    <tr>                
+                        <td> <?php echo $row['id']; ?> </td>
+                        <td> <?php echo $row['Name_Of_The_Teacher']; ?> </td> 
+                        <td> <?php echo $row['Branch']; ?> </td>
+                        <td> <?php echo $row['Title_Of_The_Book_Published']; ?> </td>
+                        <td> <?php echo $row['Title_Of_The_Chapter_Published_In_The_Book']; ?> </td>
+                        <td> <?php echo $row['Name_Of_The_Publisher']; ?> </td>
+                        <td> <?php echo $row['National_Or_International']; ?> </td>
+                        <td> <?php echo $row['ISBN_Or_ISSN_Number']; ?> </td>
+                        <td> <?php echo $row['Year_Of_Publication']; ?> </td>
+                        <td> <?php echo $row['Volume_Issue']; ?> </td>
+                        <td>
+                            <!--<a href="read.php?viewid=<?php echo htmlentities ($row['id']);?>" class="view" title="View" data-toggle="tooltip"><i class="material-icons">&#xE417;</i></a>-->
+                            <a class="edit btn-success editbtn" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
+                            <a href="uploadsindexit/<?php echo $row['pdffile1']; ?>"  class="download" title="Download" data-toggle="tooltip"><i class="fa fa-download"></i></a>
+							<a href="uploadsfrontit/<?php echo $row['pdffile2']; ?>"  class="download" title="Download" data-toggle="tooltip"><i class="fa fa-download"></i></a>
+                            <a class="delete btn-danger deletebtn" class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
+							
                             
                             
- <?php if ($status != "approved") { // If STATUS is not "approved", show the edit and delete buttons ?>
-                        <a class="edit btn-success editbtn" title="Edit" data-toggle="tooltip" <?php echo $is_disabled ?>>
-                            <i class="material-icons">&#xE254;</i>
-                        </a>
-
-                        <a class="delete btn-danger deletebtn" title="Delete" data-toggle="tooltip" <?php echo $is_disabled ?>>
-                            <i class="material-icons">&#xE872;</i>
-                        </a>
-                    <?php } ?>
-                            </td>
-                        <td> <?php echo $row['STATUS']; ?> </td>
+                            <!-- <button class="btn"><i class="fa fa-download"></i> Download</button> -->
+                        </td>
                     </tr> 
                     <tbody>
                     <?php 
@@ -612,17 +562,17 @@ else
                 console.log(data);
                 //chnage this keep same variable as above
                 $('#update_id').val(data[0]);
-                $('#year').val(data[1]);
-                $('#branch').val(data[2]);
-                $('#workshop_seminar').val(data[3]);
-                $('#coordinator').val(data[4]);
-                $('#title').val(data[5]);
-                $('#category').val(data[6]);
-                $('#others').val(data[7]);
-                $('#no_of_participants').val(data[8]);
-                $('#start_date').val(data[9]);
-                $('#end_date').val(data[10]);
-                //$('#pdffile1').val(data[11]);
+                $('#Name_Of_The_Teacher').val(data[1]);
+                $('#Branch').val(data[2]);
+                $('#Title_Of_The_Book_Published').val(data[3]);
+                $('#Title_Of_The_Chapter_Published_In_The_Book').val(data[4]);
+                $('#Name_Of_The_Publisher').val(data[5]);
+                $('#National_Or_International').val(data[6]);
+                $('#ISBN_Or_ISSN_Number').val(data[7]);
+                $('#Year_Of_Publication').val(data[8]);
+                $('#Volume_Issue').val(data[9]);
+                $('#pdffile1').val(data[10]);
+                $('#pdffile2').val(data[10]);
             });
         });
     </script>

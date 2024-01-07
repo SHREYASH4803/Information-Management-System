@@ -8,24 +8,26 @@ $queryresult = mysqli_num_rows($query);
     if($queryresult > 0){
         while($row = mysqli_fetch_assoc($query)){ 
             $id = $row['id'];
-            $branch = $row['branch'];
         }  
     }
     
     if(isset($_POST['insertdata']))
     {
-        $Academic_year = $_POST['Academic_year'];
         $Name_Of_Faculty = $_POST['Name_Of_Faculty'];
-        // $Branch = $_POST['Branch'];
+        $Branch = $_POST['Branch'];
         $Title_Of_Paper= $_POST['Title_Of_Paper'];
         $Name_Of_Author = $_POST['Name_Of_Author'];
         $Name_Of_Journal = $_POST['Name_Of_Journal'];
+        $Journal_Citation_Index = $_POST['Journal_Citation_Index'];
+        $Journal_Impact_Factor = $_POST['Journal_Impact_Factor'];
+        $Publisher = $_POST['Publisher'];
         $Year_Of_Publication = $_POST['Year_Of_Publication'];
+        $Publication_Date = $_POST['Publication_Date'];
+        $Volume_Issue = $_POST['Volume_Issue'];
         $ISSN_ISBN = $_POST['ISSN_ISBN'];
-        $Link_Of_Paper = $_POST['Link_Of_Paper'];
-        $Indexing = $_POST['Indexing'];
-        $Details_Of_Paper = $_POST['Details_Of_Paper'];
         $Paper_Weblink = $_POST['Paper_Weblink'];
+        $Link_Of_Paper = $_POST['Link_Of_Paper'];
+        $Details_Of_Paper = $_POST['Details_Of_Paper'];
         $Journal_Paper = $_FILES['Journal_Paper']['name'];
         $file_tmp = $_FILES['Journal_Paper']['tmp_name'];
         $user_id = $_POST['user_id'];
@@ -33,8 +35,8 @@ $queryresult = mysqli_num_rows($query);
         move_uploaded_file($file_tmp,"JournalPaper/$Journal_Paper");
 
         $query = "INSERT INTO journal_publications
-        (`Academic_year`, `Name_Of_Faculty`,`Title_Of_Paper`, `Name_Of_Author`,`Branch`,  `Name_Of_Journal`, `Year_Of_Publication`,`ISSN_ISBN`, `Link_Of_Paper`,  `Indexing`,`Details_Of_Paper`,`Paper_Weblink`, `Journal_Paper`,`user_id`,`STATUS`) 
-        VALUES ('$Academic_year','$Name_Of_Faculty','$Title_Of_Paper', '$Name_Of_Author',  '$branch', '$Name_Of_Journal', '$Year_Of_Publication','$ISSN_ISBN','$Link_Of_Paper','$Indexing','$Details_Of_Paper','$Paper_Weblink','$Journal_Paper','$id','PENDING')";
+        (`Name_Of_Faculty`, `Branch`, `Title_Of_Paper`, `Name_Of_Author`, `Name_Of_Journal`, `Journal_Citation_Index`, `Journal_Impact_Factor`, `Publisher`, `Year_Of_Publication`, `Publication_Date`, `Volume_Issue`, `ISSN_ISBN`, `Paper_Weblink`, `Link_Of_Paper`, `Details_Of_Paper`, `Journal_Paper`, `user_id`) 
+        VALUES ('$Name_Of_Faculty', '$Branch', '$Title_Of_Paper', '$Name_Of_Author', '$Name_Of_Journal', '$Journal_Citation_Index', '$Journal_Impact_Factor', '$Publisher', '$Year_Of_Publication', '$Publication_Date', '$Volume_Issue', '$ISSN_ISBN', '$Paper_Weblink', '$Link_Of_Paper', '$Details_Of_Paper', '$Journal_Paper', '$id')";
         
     
         $query_run = mysqli_query($connection, $query);

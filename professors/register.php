@@ -1,4 +1,4 @@
-<!-- <?php 
+<?php 
     include('../config.php');
     session_start();
 
@@ -133,4 +133,4 @@
 <?php include('../header.php'); ?> 
 
 </body>
-</html> -->
+</html>

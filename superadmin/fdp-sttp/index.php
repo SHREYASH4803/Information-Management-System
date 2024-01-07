@@ -1,5 +1,5 @@
 <?php 
-include('../../config.php');
+include('../config.php');
 session_start();
 ?>
 <!DOCTYPE html> 
@@ -35,18 +35,17 @@ session_start();
  <!-- buttons and search buttoncard -->
             <div class="card">
                 <div class="card-body">
-            
+                <?php 
+                if($_SESSION["role"] == true) {
+                    echo "Welcome". " ".$_SESSION["role"] ;
+                } else {
+                    header("Location:index.php"); 
+                }
+                ?>
+
             <div class="card-body mt-5">
                 <h2> FDP / STTP Organised </h2>
             </div>
-
-            <?php 
-if ($_SESSION["role"] == true) {
-    echo '<div style="position: absolute; top: 100px; right: 70px; font-weight: bold; color: #007bff;">Welcome ' . $_SESSION["role"] . '<br><span style="color: #008000;">You logged in as Superadmin</span></div>';
-} else {
-    header("Location: index.php"); 
-}
-?>
             <div class="card">
                 <div class="card-body btn-group">
             <form action="<?php echo $_SERVER["PHP_SELF"]; ?>" method="post">					
@@ -83,20 +82,10 @@ if ($_SESSION["role"] == true) {
                             </tr>
                         </thead>
                         
-                          <?php
+                        <?php
                         $user = $_SESSION["role"];
-                        
-                        $result = "SELECT * FROM superadmin WHERE username = '$user'";
 
-                        $query = mysqli_query($connection, $result);
-                        $queryresult = mysqli_num_rows($query); 
-                            if($queryresult > 0){
-                                while($row = mysqli_fetch_assoc($query)){ 
-                                    $id = $row['id'];
-                                }  
-                            }
-
-                        $table_query = "SELECT * FROM fdpsttporganised WHERE STATUS = 'approved' ORDER BY id ASC";
+                        $table_query = "SELECT * FROM fdpsttporganised";  
                         $query_run = mysqli_query($connection, $table_query);
                         $query_result = mysqli_num_rows($query_run); ?>
 
@@ -117,7 +106,7 @@ if ($_SESSION["role"] == true) {
                                 <td> <?php echo $developer['Total_No_Of_Days']; ?> </td>
                                 <td> <?php echo $developer['No_Of_Participants']; ?> </td>
                                 <td>
-                            <a href="../../fdpadmins/fdp-sttp/uploadsfdporganised/<?php echo $developer['pdffile']; ?>"  class="download" title="Download" data-toggle="tooltip"><i class="fa fa-download"></i></a>
+                            <a href="../../fdpadmins/uploadsfdporganised/<?php echo $developer['pdffile']; ?>"  class="download" title="Download" data-toggle="tooltip"><i class="fa fa-download"></i></a>
                         </td>
 
                             </tr>
@@ -160,7 +149,7 @@ if ($_SESSION["role"] == true) {
     if (isset($_POST["submit"])) {
         $str = mysqli_real_escape_string($connection, $_POST["search"]);
 
-        $sth = "SELECT * FROM `fdpsttporganised`WHERE STATUS = 'approved' AND( Branch LIKE '%$str%' OR Academic_year LIKE '%$str%' OR Approving_Body LIKE '%$str%' OR Title_Of_Program LIKE '%$str%' OR Convener_Of_FDP_STTP LIKE '%$str%' ";
+        $sth = "SELECT * FROM `fdpsttporganised` WHERE Branch LIKE '%$str%' OR Academic_year LIKE '%$str%' OR Approving_Body LIKE '%$str%' OR Title_Of_Program LIKE '%$str%' OR Convener_Of_FDP_STTP LIKE '%$str%' ";
         $result = mysqli_query($connection, $sth);
         $queryresult = mysqli_num_rows($result); ?>
 
@@ -190,7 +179,7 @@ if ($_SESSION["role"] == true) {
                         <td> <?php echo $row['No_Of_Participants']; ?> </td>
                         <td>
 
-                            <a href="../../fdpadmins/fdp-sttp/uploadsfdporganised/<?php echo $developer['pdffile']; ?>"  class="download" title="Download" data-toggle="tooltip"><i class="fa fa-download"></i></a>
+                            <a href="../../fdpadmins/uploadsfdporganised/<?php echo $developer['pdffile']; ?>"  class="download" title="Download" data-toggle="tooltip"><i class="fa fa-download"></i></a>
 
 							
                             

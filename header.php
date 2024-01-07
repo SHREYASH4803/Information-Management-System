@@ -57,48 +57,56 @@
     color: black;
   }
   
-  .footer {
-            position: fixed;
-            left: 0;
-            bottom: 0;
-            width: 100%;
-            height: 30px;
-            background-color: #2196f3;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 10px;
-        }
-
-        .footer a,
-        .footer p {
-            color: #f2f2f2;
-            text-decoration: none;
-            padding: 3px 10px;
-        }
-
-        .footer a:hover {
-            background-color: #ddd;
-            color: white;
-        }
-        
-        .footer p {
-            margin-bottom: 0;
-        }
+    .footer {
+     position: fixed;
+     left: 0;
+     bottom: 0;
+     width: 100%;
+      height: 30px;
+     background-color: #2196f3;
+  }
+  
+  .footer a{
+    float: left;
+    display: block;
+    color: #f2f2f2;
+    text-align: center;
+    padding-bottom: 14px;
+    padding-left: 14px;
+    padding-top: 3px;
+    text-decoration: none;
+  }
+  
+  .footer a:hover {
+    background: #ddd;
+    color: black;
+  }
+  
+  .footer p{
+    float: right;
+    display: block;
+    color: #f2f2f2;
+    text-align: center;
+    padding-bottom: 14px;
+    padding-right: 14px;
+    padding-top: 3px;
+    text-decoration: none;
+  }
     </style>
 </head>
 <body>
 <div class="navbar mb-5">
     <img class="logo"src="https://i.postimg.cc/wvDjdZdp/logo.png" alt="image" width="3%">
-    <h3 class="name">Fr. C. Rodrigues Institute of Technology</h3>
-    <a href='../../logout.php'>Logout</a>
+    <h3 class="name">Fr. Conceicao Rodrigues Institute Of Technology</h3>
+    <a href='../logout.php'>Logout</a>
 </div>
 
 
 <div class="footer">
-        <a href="../developer-page.php">Developers</a>
-        <p>Information Management System</p>
-        <p>© 2023 FCRIT. All Rights Reserved.</p>
-    </div>
+    <p>© 2022 FCRIT. All Rights Reserved.</p>
+    <a href="../developer-page.php">Developers</a>
+    <p>Information Management System</p>
+  </div> 
+
 </body>
 </html>

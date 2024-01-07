@@ -3,17 +3,17 @@
   <head>    
     <link rel="stylesheet" href="../styles.css">
   </head>
-  <body class="bg-dark"> 
-  <div class="main">
-    <div class="container">
+  <body> 
 
+   <div class="main">
+    <div class="container">
     <div class="card">
       <div class="box">
         <div class="content">
-          <h4>WORKSHOP/
-            SEMINAR</h4>
+          <h4>Workshop/
+            Seminars</h4>
           <p>organised by the Department</p>
-          <a href="workshop/index.php">Go to Criteria</a>
+          <a href="workshop-seminars/index.php">Go to Criteria</a>
         </div>
       </div>
     </div>
@@ -21,15 +21,25 @@
     <div class="card">
       <div class="box">
         <div class="content">
-          <h4>Research Projects/
-            Consultancy</h4>
+          <h4>Outreach Program</h4>
+          <p>organised by the Department</p>
+          <a href="outreach/index.php">Go to Criteria</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="box">
+        <div class="content">
+          <h4>Research Projects
+            / Consultancies
+          </h4>
           <p>details</p>
           <a href="researchprojects-consultancies/index.php">Go to Criteria</a>
         </div>
       </div>
     </div>
-    </div>
-    </div>
+    
 
     
         

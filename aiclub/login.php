@@ -22,7 +22,7 @@
         session_write_close();
 
         if($row['username'] == $username && $row['password'] == $password){
-            header("location:workshop/index.php");
+            header("location:dashboard.php");
         }  
         else{
               $msg="Invalid credentials, please try again";
@@ -40,14 +40,6 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.18/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="../global.css">
-
-    <style>
-    body {
-        background-image: url('1.jpg');
-        background-repeat: no-repeat;
-        background-size: cover;
-    }
-</style>
 </head>
 
 <body class="bg-dark">

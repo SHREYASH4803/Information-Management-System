@@ -13,12 +13,11 @@
       <div class="box">
         <div class="content">
           <h4>BOOK CHAPTERS</h4>
-          <!-- <p>in edited volumes/books published</p> -->
+          <p>in edited volumes/books published</p>
           <a href="book-chapters/index.php">Go to Criteria</a>
         </div>
       </div>
     </div>
-
 
     <div class="card">
       <div class="box">
@@ -29,27 +28,7 @@
         </div>
       </div>
     </div>
-    
-    <div class="card">
-      <div class="box">
-        <div class="content">
-          <h4>FACULTY RECOGNITION WITH AWARDS </h4>
-          <p>details</p>
-          <a href="faculty-achievement/index.php">Go to Criteria</a>
-        </div>
-      </div>
-    </div>
 
-    <div class="card">
-      <div class="box">
-        <div class="content">
-          <h4>FACULTY INTERACTION </h4>
-          <p>details</p>
-          <a href="faculty-interaction/index.php">Go to Criteria</a>
-        </div>
-      </div>
-    </div>
-    
     <div class="card">
       <div class="box">
         <div class="content">
@@ -69,33 +48,14 @@
         </div>
       </div>
     </div>
-    <div class="card">
-      <div class="box">
-        <div class="content">
-          <h4>RESEARCH CONSULTANCIES & PROJECTS</h4>
-          <p>details</p>
-          <a href="researchprojects-consultancies/index.php">Go to Criteria</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="box">
-        <div class="content">
-          <h4>FINANCIAL SUPPORT</h4>
-          <p>provided to faculty</p>
-          <a href="financial_support/index.php">Go to Criteria</a>
-        </div>
-      </div>
-    </div>
         
+  <div class="footer">
+  <a href="developers.html">Developers</a>
+  <p>Student Achievements and Placement Records</p>
 </div>
 </div>
-<div class="footer">
-        <a href="../../developer-page.php">Developers</a>
-        <p>Information Management System</p>
-        <p>© 2023 FCRIT. All Rights Reserved.</p>
-    </div>
-</body>
+
+
+  </body>
 </html>
 

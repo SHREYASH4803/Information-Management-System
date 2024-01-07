@@ -8,21 +8,6 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.18/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="global.css">
-    <link rel="icon" type="image/jpg" href="/fcrit.jpg">
-
-    <style>
-.logo {
-    opacity: 0;
-    transform: scale(0.5);
-    transition: opacity 1.5s, transform 1.5s; /* Increased transition duration */
-}
-
-.logo.show {
-    opacity: 1;
-    transform: scale(1);
-}
-</style>
-
 </head>
 
 <body class="bg-dark">
@@ -38,26 +23,20 @@
             <option value="">SELECT ROLE</option>
             <option value="professors/login.php">Faculty</option>
             <option value="branchadmins/login.php">Branch Admin</option>
-            <option value="placement_coordinator/login.php">Dept Placement Coordinator</option>
-            <option value="activity_coordinator/login.php">Dept Activity Coordinator</option>
-            <option value="placementcell/login.php">Placement Cell</option>
+            <option value="fdpadmins/login.php">FDP Admin</option>
+            <option value="iqacadmins/login.php">IQAC Admin</option>
             <option value="superadmin/login.php">Super Admin</option>
+<<<<<<< Updated upstream
+            <option value="club_index.php">Club</option>
+=======
             <option value="clubs_index.php">Clubs</option>
-            <option value="clubadmin/login.php">Club Admin</option>
-            <option value="student/login.php">Student</option>
-            <option value="studentadmin/login.php">Class Teacher</option>
+            
+>>>>>>> Stashed changes
         </select>
     </div>
   </div>
   <!-- Hero -->
 </header>
-
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        var logo = document.querySelector(".logo");
-        logo.classList.add("show");
-    });
-</script>
    
   <div class="footer">
     <p>Developed and Maintained by Department of Information Technology</p>

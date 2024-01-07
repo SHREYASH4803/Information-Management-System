@@ -32,7 +32,133 @@ session_start();
 
     <?php include('../../header.php'); ?>
 
-    
+    <!-- Modal -->
+    <!-- this is add data form Make changes to variables, keep same variables -->
+    <div class="modal fade mt-2" id="studentaddmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Add Data </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <form action="insertcode.php" method="POST" enctype="multipart/form-data" >
+
+                    <div class="modal-body">
+
+                        <div class="form-group">
+                            <label>Year of offering</label>
+                            <select name="Year_of_offering" class="form-control" required>
+                                <option value="">--Select Year--</option>
+                                <option name="Year_of_offering" value="2017-18">2017-18</option>
+                                <option name="Year_of_offering" value="2018-19">2018-19</option>
+                                <option name="Year_of_offering" value="2019-20">2019-20</option>
+                                <option name="Year_of_offering" value="2020-21">2020-21</option>
+                                <option name="Year_of_offering" value="2021-22">2021-22</option>
+                                <option name="Year_of_offering" value="2021-22">2022-23</option>
+                            </select>
+</div>
+                        <div class="form-group">
+                            <label>Department</label>
+                            <select name="Branch" class="form-control" required>
+                                <option value="">--Select Department--</option>
+                                <option name="Department" value="IT">IT</option>
+                                <option name="Department" value="EXTC">EXTC</option>
+                                <option name="Department" value="Mechanical">Mechanical</option>
+                                <option name="Department" value="Computers">Computers</option>
+                                <option name="Department" value="Electrical">Electrical</option>
+                                <option name="Department" value="Humanities">Humanities</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label> Course_coordinator </label>
+                            <input type="text" name="Course_coordinator" class="form-control" placeholder="Enter Course_coordinator" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label> Programs_offered </label>
+                            <input type="text" name="Programs_offered" class="form-control" placeholder="Programs_offered" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label> Course_code </label>
+                            <input type="text" name="Course_code" class="form-control" placeholder="Enter course code">
+                        </div>
+
+                        <div class="form-group">
+                            <label> No_of_times_offered </label>
+                            <input type="number" name="No_of_times_offered" class="form-control" placeholder="Enter No_of_times_offered" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label> Start_date </label>
+                            <input type="date" name="Start_date" class="form-control" placeholder="Enter start date" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label> End_date </label>
+                            <input type="date" name="End_date" class="form-control" placeholder="Enter end date" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label> Duration </label>
+                            <input type="number" name="Duration" class="form-control" placeholder="Enter duration" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label> No_of_students_enrolled </label>
+                            <input type="number" name="No_of_students_enrolled" class="form-control" placeholder="Enter No_of_students_enrolled" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label> No_of_students_completing </label>
+                            <input type="number" name="No_of_students_completing" class="form-control" placeholder="Enter No_of_students_completing" required>
+                        </div>
+
+
+
+                
+
+                        
+
+                        <div class="form-group">
+                            <label> Upload Report </label>
+                            <input type="file" name="pdffile1" id="pdffile1" required/><br>
+                                    <img src="" id="pdf-file1-tag" width="100px" />
+
+                                    <script type="text/javascript">
+                                        function readURL(input) {
+                                            if (input.files && input.files[0]) {
+                                                var reader = new FileReader();
+                                                
+                                                reader.onload = function (e) {
+                                                    $('#pdf-file1-tag').attr('src', e.target.result);
+                                                }
+                                                reader.readAsDataURL(input.files[0]);
+                                            }
+                                        }
+                                        $("#pdffile1").change(function(){
+                                            readURL(this);
+                                        });
+                                    </script><br>
+						</div>
+                       			
+
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" id="insertbutton" name="insertdata" class="btn btn-primary" onClick="datechecker() ">Save Data</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
 
     <!-- DELETE POP UP FORM  -->
     <!-- dont make changes-->
@@ -69,25 +195,27 @@ session_start();
  <!-- buttons and search buttoncard -->
             <div class="card">
                 <div class="card-body">
-             
+                <?php 
+                if($_SESSION["role"] == true) {
+                    echo "Welcome". " ".$_SESSION["role"] ;
+                } else {
+                    header("Location:index.php"); 
+                }
+                ?>
 
             <div class="card-body mt-5">
                 <h2> Certificate programs</h2>
             </div>
-
-            <?php 
-if ($_SESSION["role"] == true) {
-    echo '<div style="position: absolute; top: 100px; right: 70px; font-weight: bold; color: #007bff;">Welcome ' . $_SESSION["role"] . '<br><span style="color: #008000;">You logged in as Branchadmin</span></div>';
-} else {
-    header("Location: index.php"); 
-}
-?>
             <div class="card">
                 <div class="card-body btn-group">
-                
+                <form action="<?php echo $_SERVER["PHP_SELF"]; ?>" method="post">
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#studentaddmodal"> 
+                        ADD DATA
+                    </button>
+            </form> &nbsp;
 
             <form action="<?php echo $_SERVER["PHP_SELF"]; ?>" method="post">					
-				<button type="submit" onclick="exportTableToCSVuser('USerData_CertificatePrograms.csv')" class="btn btn-success">Export to excel</button>
+				<button type="submit" onclick="exportTableToCSVuser('USerData_BookChapters.csv')" class="btn btn-success">Export to excel</button>
 			</form> &nbsp; &nbsp; 
         
             <form method="post">
@@ -117,9 +245,7 @@ if ($_SESSION["role"] == true) {
                                 <th scope="col"> Duration </th>
                                 <th scope="col"> No of students enrolled </th>
                                 <th scope="col"> No of students completing </th>
-                                <th scope="col"> Upload Report </th> 
-                                <th scope="col"> STATUS </th>
-
+                                <th scope="col"> Upload Report </th>
                                
                             </tr>
                         </thead>
@@ -138,7 +264,7 @@ if ($_SESSION["role"] == true) {
                                 }  
                             }
 
-                        $table_query = "SELECT * FROM certificates  WHERE branch = '$branch' ORDER BY id ASC";
+                        $table_query = "SELECT * FROM certificates WHERE user_id=$id";
                         
                         $query_run = mysqli_query($connection, $table_query);
                         $query_result = mysqli_num_rows($query_run); ?>
@@ -149,7 +275,7 @@ if ($_SESSION["role"] == true) {
                         <tbody> <!-- change -->
                             <tr>
                                 <td> <?php echo $developer['id']; ?> </td>
-                                <td> <?php echo $developer['Branch']; ?> </td> 
+                                <td> <?php echo $developer['Department']; ?> </td> 
                                 <td> <?php echo $developer['Course_coordinator']; ?> </td>
                                 <td> <?php echo $developer['Programs_offered']; ?> </td>
                                 <td> <?php echo $developer['Course_code']; ?> </td>
@@ -161,70 +287,33 @@ if ($_SESSION["role"] == true) {
                                 <td> <?php echo $developer['No_of_students_enrolled']; ?> </td>
                                 <td> <?php echo $developer['No_of_students_completing']; ?> </td>
                                 <td>
+                            <!--<a href="read.php?viewid=<?php echo htmlentities ($developer['id']);?>" class="view" title="View" data-toggle="tooltip"><i class="material-icons">&#xE417;</i></a>-->
                             <a class="edit btn-success editbtn" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
-                           
-                            <a href="../../fdpadmins/certificate-programs/reports/<?php echo $developer['pdffile1']; ?>"  class="download" title="Download" data-toggle="tooltip"><i class="fa fa-download"></i></a>
+                            
+							<!-- <a href="uploadsfrontit/<?php echo $developer['pdffile2']; ?>"  class="download" title="Download" data-toggle="tooltip"><i class="fa fa-download"></i></a> -->
                             <a class="delete btn-danger deletebtn" class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
-                                        </td>
-                                        <td>
-                                <?php if ($developer['STATUS'] == 'PENDING') { ?>
-                                    <form method="POST" action="approved.php">
-                                        <input type="hidden" name="id" value="<?php echo $developer['id']; ?>">
-                                        <input type="submit" name="approve" value="Approve">
-                                    </form>
-                                    <form method="post" action="reject.php">
-                                        <input type="hidden" name="id" value="<?php echo $developer['id']; ?>">
-                                        <button type="submit" name="reject" class="btn btn-danger">Send Back</button>
-                                    </form>
-                                <?php } elseif ($developer['STATUS'] == 'Sent Back') { ?>
-                                    <?php echo $developer['STATUS']; ?>
-                                    <form method="POST" action="approve-now.php">
-                                        <input type="hidden" name="id" value="<?php echo $developer['id']; ?>">
-                                        <input type="submit" name="approve_now" value="Approve Now">
-                                    </form>
-                                <?php } else { ?>
-                                    <?php echo $developer['STATUS']; ?>
-                                <?php } ?>
-                            </td>
-                        </tr>
-                    </tbody>
-                <?php
+							
+                            
+                            
+                            <!-- <button class="btn"><i class="fa fa-download"></i> Download</button> -->
+                        </td>
+                                <!-- <td>
+                                    <button type="button" class="btn btn-success editbtn"> EDIT </button>
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn-danger deletebtn"> DELETE </button>
+                                </td> -->
+                            </tr>
+                        </tbody>
+                        <?php           
+                    }
                 }
-            } else 
+                else 
                 {
                     echo "No Record Found";
                 }
             ?>
                     </table>
-
-                    <?php
-        // Approve button logic
-        if (isset($_POST['approve'])) {
-            $id = $_POST['id'];
-            $select = "UPDATE certificates SET STATUS ='APPROVED' WHERE id='$id'";
-            $result = mysqli_query($connection, $select);
-            echo "Data Approved";
-            header("Location: index.php");
-        }
-
-        // Reject button logic
-        if (isset($_POST['reject'])) {
-            $id = $_POST['id'];
-            $select = "UPDATE certificates SET STATUS ='Sent Back' WHERE id='$id'";
-            $result = mysqli_query($connection, $select);
-            echo "Data Rejected";
-            header("Location: index.php");
-        }
-
-        // Approve Now button logic
-if (isset($_POST['approve_now'])) {
-    $id = $_POST['id'];
-    $select = "UPDATE certificates SET STATUS ='APPROVED' WHERE id='$id'";
-    $result = mysqli_query($connection, $select);
-    echo "Data Approved";
-    header("Location: index.php");
-}
-        ?>
             
         </div> 
     </div>
@@ -254,25 +343,10 @@ if (isset($_POST['approve_now'])) {
                             <input type="text"  id="Year_Of_offering" name="Year_of_offering" class="form-control" required>
                         </div>
 
-                       
                         <div class="form-group">
-    <label>Department</label>
-    <select name="Branch" class="form-control" required disabled >
-        <option value="">--Select Department--</option>
-        <?php
-        // Retrieve the department information from the session or any other method
-        $branch = $_SESSION['branch']; 
-
-       $branches = array("IT", "EXTC", "Mechanical", "Computers", "Electrical", "Humanities");
-foreach ($branches as $branchOption) {
-    $selected = ($branchOption == $branch) ? 'selected="selected"' : '';
-    echo '<option value="' . $branchOption . '" ' . $selected . '>' . $branchOption . '</option>';
-}
-
-        ?>
-    </select>
-</div>
-
+                            <label> Department </label>
+                            <input type="text"  id="Department" name="Department"  class="form-control" required>
+                        </div>
 
                         <div class="form-group">
                             <label> Course_coordinator </label>
@@ -296,12 +370,12 @@ foreach ($branches as $branchOption) {
 
                         <div class="form-group">
                             <label>  Start_date</label>
-                            <input type="date" name="Start_date" id="Start_date" class="form-control" placeholder="Enter Start_date " max="<?php echo date('Y-m-d'); ?>"required>
+                            <input type="date" name="Start_date" id="Start_date" class="form-control" placeholder="Enter Start_date " required>
                         </div>
 
                         <div class="form-group">
                             <label>  End_date</label>
-                            <input type="date" name="End_date" id="End_date" class="form-control" placeholder="Enter End_date " max="<?php echo date('Y-m-d'); ?>" required>
+                            <input type="date" name="End_date" id="End_date" class="form-control" placeholder="Enter End_date " required>
                         </div>
 
                         <div class="form-group">
@@ -355,7 +429,6 @@ foreach ($branches as $branchOption) {
                                 <th> No of students enrolled </th>
                                 <th> No of students completing </th>
                                 <th> Upload Report </th>
-                                <th> Status</th>
                                
                             </tr>
                         </thead>       
@@ -363,7 +436,7 @@ foreach ($branches as $branchOption) {
     if (isset($_POST["submit"])) {
         $str = mysqli_real_escape_string($connection, $_POST["search"]);
 
-        $sth = "SELECT * FROM `certificates` WHERE branch = '$branch' AND (Course_coordinator LIKE '%$str%' OR Programs_offered LIKE '%$str%' OR Course_code LIKE '%$str%' OR Year_of_offering LIKE '%$str%' OR No_of_times_offered LIKE '$str' OR Start_date LIKE '%$str%' OR End_date LIKE '%$str%' OR Duration LIKE '%$str%' OR No_of_students_enrolled LIKE '%$str%' OR No_of_students_completing LIKE '%$str%' OR STATUS LIKE '$str')";
+        $sth = "SELECT * FROM `certificates` WHERE user_id=$id AND (Department LIKE '%$str%' OR Course_coordinator LIKE '%$str%' OR Programs_offered LIKE '%$str%' OR Course_code LIKE '%$str%' OR Year_of_offering LIKE '%$str%' OR No_of_times_offered LIKE '$str' OR Start_date LIKE '%$str%' OR End_date LIKE '%$str%' OR Duration LIKE '%$str%' OR No_of_students_enrolled LIKE '%$str%' OR No_of_students_completing LIKE '%$str%') ";
         
         $result = mysqli_query($connection, $sth);
         $queryresult = mysqli_num_rows($result); ?>
@@ -382,7 +455,7 @@ foreach ($branches as $branchOption) {
              
                     <tr>                
                         <td> <?php echo $row['id']; ?> </td>
-                                <td> <?php echo $row['Branch']; ?> </td> 
+                                <td> <?php echo $row['Department']; ?> </td> 
                                 <td> <?php echo $row['Course_coordinator']; ?> </td>
                                 <td> <?php echo $row['Programs_offered']; ?> </td>
                                 <td> <?php echo $row['Course_code']; ?> </td>
@@ -396,7 +469,7 @@ foreach ($branches as $branchOption) {
                                 <td>
                             <!--<a href="read.php?viewid=<?php echo htmlentities ($row['id']);?>" class="view" title="View" data-toggle="tooltip"><i class="material-icons">&#xE417;</i></a>-->
                             <a class="edit btn-success editbtn" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
-                            <a href="../../fdpadmins/certificate-programs/reports/<?php echo $row['pdffile1']; ?>"  class="download" title="Download" data-toggle="tooltip"><i class="fa fa-download"></i></a>
+                            <a href="uploadsindexit/<?php echo $row['pdffile1']; ?>"  class="download" title="Download" data-toggle="tooltip"><i class="fa fa-download"></i></a>
 							<!-- <a href="uploadsfrontit/<?php echo $row['pdffile2']; ?>"  class="download" title="Download" data-toggle="tooltip"><i class="fa fa-download"></i></a> -->
                             <a class="delete btn-danger deletebtn" class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
 							
@@ -404,26 +477,6 @@ foreach ($branches as $branchOption) {
                             
                             <!-- <button class="btn"><i class="fa fa-download"></i> Download</button> -->
                         </td>
-                        <td>
-                                <?php if ($row['STATUS'] == 'PENDING') { ?>
-                                    <form method="POST" action="approved.php">
-                                        <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
-                                        <input type="submit" name="approve" value="Approve">
-                                    </form>
-                                    <form method="post" action="reject.php">
-                                        <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
-                                        <button type="submit" name="reject" class="btn btn-danger">Send Back</button>
-                                    </form>
-                                <?php } elseif ($row['STATUS'] == 'Sent Back') { ?>
-                                    <?php echo $row['STATUS']; ?>
-                                    <form method="POST" action="approve-now.php">
-                                        <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
-                                        <input type="submit" name="approve_now" value="Approve Now">
-                                    </form>
-                                <?php } else { ?>
-                                    <?php echo $row['STATUS']; ?>
-                                <?php } ?>
-                            </td>
                     </tr> 
                     <tbody>
                     <?php 
@@ -494,7 +547,7 @@ foreach ($branches as $branchOption) {
                 console.log(data);
                 //chnage this keep same variable as above
                 $('#update_id').val(data[0]);
-                $('#Branch').val(data[1]);
+                $('#Department').val(data[1]);
                 $('#Course_coordinator').val(data[2]);
                 $('#Programs_offered').val(data[3]);
                 $('#Course_code').val(data[4]);
@@ -536,7 +589,7 @@ foreach ($branches as $branchOption) {
         downloadLink.click();  
     }  
 
-    //user-defined function to export the data to CSV file formatt  
+    //user-defined function to export the data to CSV file format  
     function exportTableToCSVuser(filename) {  
     //declare a JavaScript variable of array type  
     var csv = [];  

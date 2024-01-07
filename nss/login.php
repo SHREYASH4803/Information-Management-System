@@ -35,29 +35,21 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=, initial-scale=5.0">
+    <meta name="viewport" content="width=, initial-scale=1.0">
     <title>Login</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.18/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="../global.css">
-
-    <style>
-    body {
-        background-image: url('1.jpg');
-        background-repeat: no-repeat;
-        background-size: cover;
-    }
-</style>
 </head>
 
 <body class="bg-dark">
-    <!-- <div class="navbar">
+<div class="navbar">
       <img class="logo" src="https://i.postimg.cc/wvDjdZdp/logo.png" alt="image" width="3%">
       <h3 class="name">Fr. Conceicao Rodrigues Institute Of Technology</h3>
-    </div> -->
+    </div>
 
-    <div class="container" style="margin: 230px;">
-            <div class="row justify-content-center">
+    <div class="container mt-5">
+        <div class="row justify-content-center">
             <div class="col-lg-5 bg-light mt-5 px-0">
                 <h3 class="text-center text-light bg-primary p-3"> Login </h3>
                 <form action= "<?= $_SERVER['PHP_SELF'] ?>" method="post" class="p-4">

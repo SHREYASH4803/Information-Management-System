@@ -1,8 +1,9 @@
 <?php 
     include('../config.php');
     session_start();
+
     $msg="";
-//shreyash
+
     if(isset($_POST['login'])){
         $username = $_POST['username'];
         $password = $_POST['password'];
@@ -39,14 +40,6 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.18/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="global.css">
-
-    <style>
-    body {
-        background-image: url('1.jpg');
-        background-repeat: no-repeat;
-        background-size: cover;
-    }
-</style>
 </head>
 
 <body class="bg-dark">
@@ -92,10 +85,6 @@
                     </div>
 
                     <h5 class="text-danger text-center"><?= $msg; ?> </h5>
-
-<a href="password-reset.php" class="text-center">Forgot/Reset Password </a>
-
-
 
                 </form>
             </div>

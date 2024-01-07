@@ -36,19 +36,17 @@ session_start();
  <!-- buttons and search buttoncard -->
             <div class="card">
                 <div class="card-body">
-              
+                <?php 
+                if($_SESSION["role"] == true) {
+                    echo "Welcome". " ".$_SESSION["role"] ;
+                } else {
+                    header("Location:index.php"); 
+                }
+                ?>
 
             <div class="card-body mt-5">
                 <h2> Book Chapters/Books Published</h2>
             </div>
-
-            <?php 
-if ($_SESSION["role"] == true) {
-    echo '<div style="position: absolute; top: 100px; right: 70px; font-weight: bold; color: #007bff;">Welcome ' . $_SESSION["role"] . '<br><span style="color: #008000;">You logged in as Superadmin</span></div>';
-} else {
-    header("Location: index.php"); 
-}
-?>
             <div class="card">
                 <div class="card-body btn-group">
             <form action="<?php echo $_SERVER["PHP_SELF"]; ?>" method="post">					
@@ -70,19 +68,18 @@ if ($_SESSION["role"] == true) {
                     <table id="datatableid" class="table table-bordered table-dark mt-2">
                         <thead>
                             <tr>
-                            <th scope="col"> ID </th>
-                                <th scope="col"> ACADEMIC YEAR </th>
+                                <th scope="col"> ID </th>
+                                <th scope="col"> NAME OF TEACHER </th>
                                 <th scope="col"> BRANCH </th>
-                                <th scope="col"> NAME OF THE TEACHER </th>
-                                <th scope="col"> TITLE OF THE BOOK/CHAPTER PUBLISHED* </th>
-                                <th scope="col"> NATIONAL/INTERNATIONAL* </th>
-                                <th scope="col"> YEAR OF PUBLICATION* </th>
-                                <th scope="col"> ISBN/ISSN NUMBER* </th>
-								<th scope="col"> AFFILIATING INSTITUTE AT TIME OF PUBLICATION* </th>
-                                <th scope="col"> NAME OF PUBLISHER* </th>
-                                <th scope="col"> PAPER WEBLINK/DOI* </th>
+                                <th scope="col"> TITLE OF BOOK </th>
+                                <th scope="col"> TITLE OF CHAPTER </th>
+                                <th scope="col"> NAME OF PUBLISHER </th>
+                                <th scope="col"> NATIONAL </th>
+								<th scope="col"> ISBN/ISSN </th>
+                                <th scope="col"> PUBLICATION YEAR </th>
+                                <th scope="col"> VOLUME ISSUE </th>
+                                
                                 <th scope="col"> ACTION </th>
-                                <!-- <th scope="col"> STATUS</th> -->
                                
                             </tr>
                         </thead>
@@ -101,7 +98,7 @@ if ($_SESSION["role"] == true) {
                             }
 
 
-                        $table_query = "SELECT * FROM bookschapter WHERE STATUS = 'approved' ORDER BY id ASC";
+                        $table_query = "SELECT * FROM bookschapter ORDER BY id ASC";
                         $query_run = mysqli_query($connection, $table_query);
                         $query_result = mysqli_num_rows($query_run); ?>
 
@@ -110,21 +107,20 @@ if ($_SESSION["role"] == true) {
                                             ?>
                         <tbody> <!-- change -->
                             <tr>
-                            <td> <?php echo $developer['id']; ?> </td>
-                                <td> <?php echo $developer['academic_year']; ?> </td>                                 
-                                <td> <?php echo $developer['Branch']; ?> </td>
+                                <td> <?php echo $developer['id']; ?> </td>
                                 <td> <?php echo $developer['Name_Of_The_Teacher']; ?> </td> 
+                                <td> <?php echo $developer['Branch']; ?> </td>
                                 <td> <?php echo $developer['Title_Of_The_Book_Published']; ?> </td>
-                                <td> <?php echo $developer['National_Or_International']; ?> </td>                                
-                                <td> <?php echo $developer['Year_Of_Publication']; ?> </td>
-                                <td> <?php echo $developer['ISBN_Or_ISSN_Number']; ?> </td>
-                                <td> <?php echo $developer['Affiliating_institute']; ?> </td>
+                                <td> <?php echo $developer['Title_Of_The_Chapter_Published_In_The_Book']; ?> </td>
                                 <td> <?php echo $developer['Name_Of_The_Publisher']; ?> </td>
-                                <td><a href="<?php echo $developer['paper_link']; ?>" target="_blank"><?php echo $developer['paper_link']; ?></a></td>
+                                <td> <?php echo $developer['National_Or_International']; ?> </td>
+                                <td> <?php echo $developer['ISBN_Or_ISSN_Number']; ?> </td>
+                                <td> <?php echo $developer['Year_Of_Publication']; ?> </td>
+                                <td> <?php echo $developer['Volume_Issue']; ?> </td>
                                 <td>
                             <!--<a href="read.php?viewid=<?php echo htmlentities ($developer['id']);?>" class="view" title="View" data-toggle="tooltip"><i class="material-icons">&#xE417;</i></a>-->
-                            <a href="../../professors/book-chapters/uploadsindexit/<?php echo $developer['pdffile1']; ?>"  class="download" title="Download" data-toggle="tooltip"><i class="fa fa-download"></i></a>
-							<a href="../../professors/book-chapters/uploadsfrontit/<?php echo $developer['pdffile2']; ?>"  class="download" title="Download" data-toggle="tooltip"><i class="fa fa-download"></i></a>
+                            <a href="uploadsindexit/<?php echo $developer['pdffile1']; ?>"  class="download" title="Download" data-toggle="tooltip"><i class="fa fa-download"></i></a>
+							<a href="uploadsfrontit/<?php echo $developer['pdffile2']; ?>"  class="download" title="Download" data-toggle="tooltip"><i class="fa fa-download"></i></a>
 							
                             
                             
@@ -159,27 +155,24 @@ if ($_SESSION["role"] == true) {
                     <table class="table table-bordered ">
                     <thead>
                         <tr>
-                            <th> ID </th>
-                            <!-- <th scope="col"> ID </th> -->
-                                <th scope="col"> ACADEMIC YEAR </th>
-                                <th scope="col"> BRANCH </th>
-                                <th scope="col"> NAME OF THE TEACHER </th>
-                                <th scope="col"> TITLE OF THE BOOK/CHAPTER PUBLISHED* </th>
-                                <th scope="col"> NATIONAL/INTERNATIONAL* </th>
-                                <th scope="col"> YEAR OF PUBLICATION* </th>
-                                <th scope="col"> ISBN/ISSN NUMBER* </th>
-								<th scope="col"> AFFILIATING INSTITUTE AT TIME OF PUBLICATION* </th>
-                                <th scope="col"> NAME OF PUBLISHER* </th>
-                                <th scope="col"> PAPER WEBLINK/DOI* </th>
-                                <th scope="col"> ACTION </th>
-                                <!-- <th scope="col"> STATUS</th> -->
+                            <th> ID </th> 
+                            <th> NAME OF TEACHER </th>
+                            <th> BRANCH </th>
+                            <th> TITLE OF BOOK </th>
+                            <th> TITLE OF CHAPTER </th>
+                            <th> NAME OF PUBLISHER </th>
+                            <th> NATIONAL </th>
+                            <th> ISBN/ISSN </th>
+                            <th> PUBLICATION YEAR </th>
+                            <th> VOLUME ISSUE </th>
+                            <th> ACTION </th>
                         </tr>
                     <thead>       
 <?php 
     if (isset($_POST["submit"])) {
         $str = mysqli_real_escape_string($connection, $_POST["search"]);
 
-        $sth = "SELECT * FROM `bookschapter` WHERE STATUS='approved' AND (Branch LIKE '%$str%' OR Name_Of_The_Teacher LIKE '%$str%' OR Title_Of_The_Book_Published LIKE '%$str%' OR paper_link LIKE '%$str%' OR Name_Of_The_Publisher LIKE '%$str%' OR National_Or_International LIKE '$str' OR ISBN_Or_ISSN_Number LIKE '%$str%' OR Year_Of_Publication LIKE '%$str%' OR Affiliating_institute LIKE '%$str%' OR STATUS LIKE '$str' OR academic_year LIKE '%$str%') ";
+            $sth = "SELECT * FROM `bookschapter` WHERE Branch LIKE '%$str%' OR Name_Of_The_Teacher LIKE '%$str%' OR Title_Of_The_Book_Published LIKE '%$str%' OR Title_Of_The_Chapter_Published_In_The_Book LIKE '%$str%' OR Name_Of_The_Publisher LIKE '%$str%' OR National_Or_International LIKE '$str' OR ISBN_Or_ISSN_Number LIKE '%$str%' OR Year_Of_Publication LIKE '%$str%' OR Volume_Issue LIKE '%$str%'";
         
         $result = mysqli_query($connection, $sth);
         $queryresult = mysqli_num_rows($result); ?>
@@ -197,17 +190,16 @@ if ($_SESSION["role"] == true) {
                     <tbody id="srch"> 
              
                     <tr>                
-                    <td> <?php echo $row['id']; ?> </td>
-                                <td> <?php echo $row['academic_year']; ?> </td>                                 
-                                <td> <?php echo $row['Branch']; ?> </td>
-                                <td> <?php echo $row['Name_Of_The_Teacher']; ?> </td> 
-                                <td> <?php echo $row['Title_Of_The_Book_Published']; ?> </td>
-                                <td> <?php echo $row['National_Or_International']; ?> </td>                                
-                                <td> <?php echo $row['Year_Of_Publication']; ?> </td>
-                                <td> <?php echo $row['ISBN_Or_ISSN_Number']; ?> </td>
-                                <td> <?php echo $row['Affiliating_institute']; ?> </td>
-                                <td> <?php echo $row['Name_Of_The_Publisher']; ?> </td>
-                                <td><a href="<?php echo $row['paper_link']; ?>" target="_blank"><?php echo $row['paper_link']; ?></a></td>
+                        <td> <?php echo $row['id']; ?> </td>
+                        <td> <?php echo $row['Name_Of_The_Teacher']; ?> </td> 
+                        <td> <?php echo $row['Branch']; ?> </td>
+                        <td> <?php echo $row['Title_Of_The_Book_Published']; ?> </td>
+                        <td> <?php echo $row['Title_Of_The_Chapter_Published_In_The_Book']; ?> </td>
+                        <td> <?php echo $row['Name_Of_The_Publisher']; ?> </td>
+                        <td> <?php echo $row['National_Or_International']; ?> </td>
+                        <td> <?php echo $row['ISBN_Or_ISSN_Number']; ?> </td>
+                        <td> <?php echo $row['Year_Of_Publication']; ?> </td>
+                        <td> <?php echo $row['Volume_Issue']; ?> </td>
                         <td>
                             <!--<a href="read.php?viewid=<?php echo htmlentities ($developer['id']);?>" class="view" title="View" data-toggle="tooltip"><i class="material-icons">&#xE417;</i></a>-->
                             <a href="uploadsindexextc/<?php echo $developer['pdffile1']; ?>"  class="download" title="Download" data-toggle="tooltip"><i class="fa fa-download"></i></a>
@@ -287,18 +279,15 @@ if ($_SESSION["role"] == true) {
                 console.log(data);
                 //chnage this keep same variable as above
                 $('#update_id').val(data[0]);
-                $('#academic_year').val(data[1]);
+                $('#Name_Of_The_Teacher').val(data[1]);
                 $('#Branch').val(data[2]);
-                $('#Name_Of_The_Teacher').val(data[3]);
-                $('#Title_Of_The_Book_Published').val(data[4]);
-                $('#National_Or_International').val(data[5]);
-                $('#Year_Of_Publication').val(data[6]);
+                $('#Title_Of_The_Book_Published').val(data[3]);
+                $('#Title_Of_The_Chapter_Published_In_The_Book').val(data[4]);
+                $('#Name_Of_The_Publisher').val(data[5]);
+                $('#National_Or_International').val(data[6]);
                 $('#ISBN_Or_ISSN_Number').val(data[7]);
-                $('#Affiliating_institute').val(data[8]);
-                $('#Name_Of_The_Publisher').val(data[9]);
-                $('#paper_link').val(data[10]);
-                $('#pdffile1').val(data[11]);
-                $('#pdffile2').val(data[12]);
+                $('#Year_Of_Publication').val(data[8]);
+                $('#Volume_Issue').val(data[9]);
             });
         });
     </script>
@@ -336,20 +325,12 @@ if ($_SESSION["role"] == true) {
     var rows = x.querySelectorAll("table tr");  
 
     //merge the whole data in tabular form   
-    for (var i = 0; i < rows.length; i++) {  
-    var row = [];
-    var cols = rows[i].querySelectorAll("td, th");  
-    for (var j = 1; j < cols.length - 2; j++) {
-        // Check if the cell value contains a comma, if so, wrap it in double quotes
-        var cellValue = cols[j].innerText;
-        if (cellValue.includes(',')) {
-            row.push('"' + cellValue + '"');
-        } else {
-            row.push(cellValue);
-        }
-    }
-    csv.push(row.join(","));
-}
+    for(var i=0; i<rows.length; i++) {  
+        var row = [], cols = rows[i].querySelectorAll("td, th");  
+        for( var j=1; j<cols.length-1; j++)  
+        row.push(cols[j].innerText);  
+        csv.push(row.join(","));  
+    }   
     //call the function to download the CSV file  
     downloadCSVuser(csv.join("\n"), filename);  
     }  
@@ -380,20 +361,12 @@ if ($_SESSION["role"] == true) {
     var rows = x.querySelectorAll("table tr");  
 
     //merge the whole data in tabular form   
-    for (var i = 0; i < rows.length; i++) {  
-    var row = [];
-    var cols = rows[i].querySelectorAll("td, th");  
-    for (var j = 1; j < cols.length - 2; j++) {
-        // Check if the cell value contains a comma, if so, wrap it in double quotes
-        var cellValue = cols[j].innerText;
-        if (cellValue.includes(',')) {
-            row.push('"' + cellValue + '"');
-        } else {
-            row.push(cellValue);
-        }
-    }
-    csv.push(row.join(","));
-}
+    for(var i=0; i<rows.length; i++) {  
+        var row = [], cols = rows[i].querySelectorAll("td, th");  
+        for( var j=1; j<cols.length-1; j++)  
+        row.push(cols[j].innerText);  
+        csv.push(row.join(","));  
+    }   
     //call the function to download the CSV file  
     downloadCSV(csv.join("\n"), filename);  
     }  

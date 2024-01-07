@@ -22,7 +22,7 @@ if(isset($_POST['deletedata']))
     {
         echo '<script> alert("Data Deleted"); </script>';
         header("Location:index.php");
-    }#as
+    }
     else
     {
         echo '<script> alert("Data Not Deleted"); </script>';
